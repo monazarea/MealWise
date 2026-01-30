@@ -8,4 +8,13 @@
     <string name="master_your_menu">Master Your Menu</string>
     <string name="sign_up">Sign Up</string>
     <string name="login">Login</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password_hint">••••••••</string>
+    <string name="password">Password</string>
+    <string name="chef_example_com">chef@example.com</string>
+    <string name="email_address">Email Address</string>
+    <string name="plan_cook_and_discover_recipes_offline">Plan, cook, and discover recipes offline.</string>
+    <string name="or_continue_with">OR CONTINUE WITH</string>
+    <string name="facebook">Facebook</string>
+    <string name="continue_as_guest">Continue as Guest</string>
 </resources>
