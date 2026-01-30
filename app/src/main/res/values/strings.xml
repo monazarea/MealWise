@@ -4,4 +4,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="plan_cook_discover">PLAN • COOK • DISCOVER</string>
     <string name="mealwise">MealWise</string>
+    <string name="meal_planner">Meal Planner</string>
+    <string name="master_your_menu">Master Your Menu</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
 </resources>
