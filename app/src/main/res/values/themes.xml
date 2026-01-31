@@ -7,5 +7,16 @@
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
+
     <style name="Theme.MealWise" parent="Base.Theme.MealWise" />
+
+    <style name="BottomNavStyle" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@color/background_dark</item>
+
+        <item name="itemActiveIndicatorStyle">@style/MyCustomIndicator</item>
+    </style>
+
+    <style name="MyCustomIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/light_green</item>
+    </style>
 </resources>
