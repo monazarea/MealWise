@@ -17,4 +17,14 @@
     <string name="or_continue_with">OR CONTINUE WITH</string>
     <string name="facebook">Facebook</string>
     <string name="continue_as_guest">Continue as Guest</string>
+    <string name="search_for_meals">Search for meals...</string>
+    <string name="dishdash">DishDash</string>
+    <string name="featured_today">Featured Today</string>
+    <string name="view_meal">View Meal</string>
+    <string name="see_all">See All</string>
+    <string name="categories">Categories</string>
+    <string name="home">Home</string>
+    <string name="planner">Planner</string>
+    <string name="favorites">Favorites</string>
+    <string name="profile">Profile</string>
 </resources>
