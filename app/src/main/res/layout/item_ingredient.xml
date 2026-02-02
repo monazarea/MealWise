@@ -33,5 +33,12 @@
         android:maxLines="2"
         android:ellipsize="end"
         android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tvIngredientMeasure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="200g"
+        android:textColor="@color/gray"
+        android:textSize="12sp" />
 
 </LinearLayout>
