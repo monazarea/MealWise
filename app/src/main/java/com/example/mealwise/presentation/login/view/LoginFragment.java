@@ -1,15 +1,16 @@
-package com.example.mealwise;
+package com.example.mealwise.presentation.login.view;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.WindowCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.mealwise.R;
 
 public class LoginFragment extends Fragment {
 

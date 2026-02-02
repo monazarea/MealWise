@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "109144124141",
+    "project_id": "mealwise-fc267",
+    "storage_bucket": "mealwise-fc267.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109144124141:android:343754c44945d9db397ae4",
+        "android_client_info": {
+          "package_name": "com.example.mealwise"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyB2f-_Z3qU_7CZGc6bs51249912benC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
