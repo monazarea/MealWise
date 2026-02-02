@@ -27,4 +27,11 @@
     <string name="planner">Planner</string>
     <string name="favorites">Favorites</string>
     <string name="profile">Profile</string>
+    <string name="italian_cuisine">ITALIAN CUISINE</string>
+    <string name="spaghetti_carbonara">Spaghetti Carbonara</string>
+    <string name="authentic_roman_pasta_recipe">Authentic Roman Pasta Recipe</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instructions">Instructions</string>
+    <string name="video_tutorial">Video Tutorial</string>
+    <string name="watch_authentic_carbonara_cooking_guide">Watch: Authentic Carbonara Cooking Guide</string>
 </resources>
