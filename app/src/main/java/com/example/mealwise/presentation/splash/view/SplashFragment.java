@@ -1,4 +1,4 @@
-package com.example.mealwise;
+package com.example.mealwise.presentation.splash.view;
 
 import android.os.Bundle;
 
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+
+import com.example.mealwise.R;
 
 
 public class SplashFragment extends Fragment {

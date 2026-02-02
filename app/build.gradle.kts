@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -48,5 +49,16 @@ dependencies {
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.lottie)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.analytics)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+    implementation(libs.converter.gson)
+    implementation(libs.glide)
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+
 
 }
