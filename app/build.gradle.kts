@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.room.runtime)
     annotationProcessor(libs.androidx.room.compiler)
+    implementation("com.firebaseui:firebase-ui-auth:9.0.0")
 
 
 }
