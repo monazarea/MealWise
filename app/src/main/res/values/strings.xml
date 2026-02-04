@@ -34,4 +34,7 @@
     <string name="instructions">Instructions</string>
     <string name="video_tutorial">Video Tutorial</string>
     <string name="watch_authentic_carbonara_cooking_guide">Watch: Authentic Carbonara Cooking Guide</string>
+    <string name="username">Username</string>
+    <string name="chef_name">Chef Name</string>
+    <string name="google">Google</string>
 </resources>
