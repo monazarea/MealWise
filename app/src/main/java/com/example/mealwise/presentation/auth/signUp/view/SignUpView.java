@@ -1,7 +1,7 @@
-package com.example.mealwise.presentation.signUp.view;
+package com.example.mealwise.presentation.auth.signUp.view;
 
 public interface SignUpView {
-    void showLoading();
+    void showButtonLoading();
     void hideLoading();
 
     void showNameError(String message);
@@ -12,4 +12,5 @@ public interface SignUpView {
     void showError(String message);
     void showSuccess();
     void navigateToHome();
+
 }

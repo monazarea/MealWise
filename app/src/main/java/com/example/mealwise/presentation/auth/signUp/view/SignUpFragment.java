@@ -1,4 +1,4 @@
-package com.example.mealwise.presentation.signUp.view;
+package com.example.mealwise.presentation.auth.signUp.view;
 
 import android.os.Bundle;
 
@@ -10,17 +10,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.mealwise.R;
 import com.example.mealwise.data.auth.datasource.AuthRemoteDataSourceImp;
 import com.example.mealwise.data.auth.repository.AuthRepositoryImpl;
-import com.example.mealwise.presentation.signUp.presenter.SignUpPresenter;
-import com.example.mealwise.presentation.signUp.presenter.SignUpPresenterImpl;
+import com.example.mealwise.presentation.auth.signUp.presenter.SignUpPresenter;
+import com.example.mealwise.presentation.auth.signUp.presenter.SignUpPresenterImpl;
 import com.example.mealwise.utils.AlertUtils;
+import com.example.mealwise.utils.GoogleAuthManager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import androidx.credentials.CredentialManager;
+
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 
 public class SignUpFragment extends Fragment implements SignUpView {
@@ -31,11 +35,15 @@ public class SignUpFragment extends Fragment implements SignUpView {
     private Button btnSignUp;
     private ProgressBar progressBar;
     private String originalButtonText;
+    private LinearLayout btnGoogle;
+    private GoogleAuthManager googleAuthManager;
+    private final CompositeDisposable disposables = new CompositeDisposable();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_sign_up, container, false);
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -51,6 +59,8 @@ public class SignUpFragment extends Fragment implements SignUpView {
         AuthRepositoryImpl repository = AuthRepositoryImpl.getInstance(remoteDataSource);
         presenter = new SignUpPresenterImpl(this, repository);
 
+        String webClientId = getString(R.string.default_web_client_id);
+        googleAuthManager = new GoogleAuthManager(requireContext(), webClientId);
         btnSignUp.setOnClickListener(v -> {
             clearErrors();
             String username = etUsername.getText().toString().trim();
@@ -58,8 +68,25 @@ public class SignUpFragment extends Fragment implements SignUpView {
             String password = etPassword.getText().toString().trim();
             String confirmPass = etConfirmPassword.getText().toString().trim();
 
-            presenter.registerUser(username, email, password, confirmPass);
+            presenter.registerWithEmailAndPassword(username, email, password, confirmPass);
         });
+        btnGoogle.setOnClickListener(v -> {
+            signInWithGoogle();
+        });
+    }
+    private void signInWithGoogle() {
+        disposables.add(
+                googleAuthManager.signIn()
+                        .subscribe(
+                                idToken -> {
+                                    presenter.registerWithGoogle(idToken);
+                                },
+                                throwable -> {
+                                    hideLoading();
+                                    showError(throwable.getMessage());
+                                }
+                        )
+        );
     }
     private void initViews(View view) {
 
@@ -75,9 +102,11 @@ public class SignUpFragment extends Fragment implements SignUpView {
         btnSignUp = view.findViewById(R.id.btnSignUP);
         progressBar = view.findViewById(R.id.progressBar);
         originalButtonText = btnSignUp.getText().toString();
+        btnGoogle = view.findViewById(R.id.layoutGoogleSignIn);
     }
+
     @Override
-    public void showLoading() {
+    public void showButtonLoading() {
         btnSignUp.setEnabled(false);
         btnSignUp.setText("");
         btnSignUp.setAlpha(0.5f);

@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.mealwise.presentation.login.view.LoginFragment"
+        android:name="com.example.mealwise.presentation.auth.login.view.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.mealwise.presentation.signUp.view.SignUpFragment"
+        android:name="com.example.mealwise.presentation.auth.signUp.view.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action

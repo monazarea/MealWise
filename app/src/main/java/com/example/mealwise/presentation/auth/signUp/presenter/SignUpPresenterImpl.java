@@ -1,10 +1,8 @@
-package com.example.mealwise.presentation.signUp.presenter;
-
-import android.text.TextUtils;
+package com.example.mealwise.presentation.auth.signUp.presenter;
 
 import com.example.mealwise.data.auth.models.SignUpRequest;
 import com.example.mealwise.data.auth.repository.AuthRepository;
-import com.example.mealwise.presentation.signUp.view.SignUpView;
+import com.example.mealwise.presentation.auth.signUp.view.SignUpView;
 import com.example.mealwise.utils.ValidationUtils;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -22,19 +20,49 @@ public class SignUpPresenterImpl implements SignUpPresenter{
         this.repository = repository;
     }
     @Override
-    public void registerUser(String username, String email, String password, String confirmPassword) {
+    public void registerWithEmailAndPassword(String username, String email, String password, String confirmPassword) {
         if(!validateAllFields(username, email, password, confirmPassword))
             return;
 
         SignUpRequest request = new SignUpRequest(username, email, password);
-        view.showLoading();
+        view.showButtonLoading();
 
-        performSignUp(request);
+        performSignUpWithEmailAndPassword(request);
     }
 
-    private void performSignUp(SignUpRequest request){
+    @Override
+    public void registerWithGoogle(String idToken) {
+        //view.showLoading();
+        performSignUpWithGoogle(idToken);
+
+    }
+
+    @Override
+    public void continueAsGuest() {
+
+    }
+
+    private void performSignUpWithEmailAndPassword(SignUpRequest request){
         disposables.add(
                 repository.signUp(request)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                () -> {
+                                    view.hideLoading();
+//                                    view.showSuccess();
+                                    view.navigateToHome();
+                                },
+                                error -> {
+                                    view.hideLoading();
+                                    view.showError(error.getMessage());
+                                }
+                        )
+        );
+    }
+    private void performSignUpWithGoogle(String idToken){
+        disposables.add(
+                repository.signInWithGoogle(idToken)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -82,10 +110,9 @@ public class SignUpPresenterImpl implements SignUpPresenter{
         return isValid;
     }
 
-    @Override
-    public void continueAsGuest() {
 
-    }
+
+
 
     @Override
     public void onDestroy() {
