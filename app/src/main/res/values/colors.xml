@@ -12,6 +12,9 @@
     <color name="blue">#4E75CE</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="more_light_green">#9DD7B0</color>
+    <color name="light_text">#E1E6ED</color>
+    <color name="success_green">#4CAF50</color>
+    <color name="error_red">#D32F2F</color>
 
 
 </resources>
