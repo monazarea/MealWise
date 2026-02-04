@@ -63,6 +63,9 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.rxandroid)
     implementation(libs.rxjava)
+    implementation(libs.androidx.credentials.v130)
+    implementation(libs.androidx.credentials.play.services.auth.v130)
+    implementation(libs.googleid.v111)
 
 
 

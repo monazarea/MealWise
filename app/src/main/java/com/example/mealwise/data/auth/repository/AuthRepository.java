@@ -5,4 +5,5 @@ import io.reactivex.rxjava3.core.Completable;
 
 public interface AuthRepository {
     Completable signUp(SignUpRequest signUPRequest);
+    Completable signInWithGoogle(String idToken);
 }

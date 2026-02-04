@@ -1,4 +1,4 @@
-package com.example.mealwise.presentation.login.view;
+package com.example.mealwise.presentation.auth.login.view;
 
 import android.os.Bundle;
 
