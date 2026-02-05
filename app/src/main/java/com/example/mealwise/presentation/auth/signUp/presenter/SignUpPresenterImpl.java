@@ -50,7 +50,7 @@ public class SignUpPresenterImpl implements SignUpPresenter{
                         .subscribe(
                                 () -> {
                                     view.hideLoading();
-//                                    view.showSuccess();
+                                    view.showSuccess();
                                     view.navigateToHome();
                                 },
                                 error -> {
@@ -68,7 +68,7 @@ public class SignUpPresenterImpl implements SignUpPresenter{
                         .subscribe(
                                 () -> {
                                     view.hideLoading();
-                                    view.showSuccess();
+                                   // view.showSuccess();
                                     view.navigateToHome();
                                 },
                                 error -> {
@@ -109,9 +109,6 @@ public class SignUpPresenterImpl implements SignUpPresenter{
 
         return isValid;
     }
-
-
-
 
 
     @Override
