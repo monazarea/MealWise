@@ -53,7 +53,7 @@ public class SplashFragment extends Fragment implements  SplashView {
 
     @Override
     public void navigateToOnboarding() {
-        // todo i will change after add onBoarding screens
+        // todo i will change after adding onBoarding screens
         navigateToAuth();
 
     }
