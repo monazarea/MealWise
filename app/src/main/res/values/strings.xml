@@ -39,4 +39,5 @@
     <string name="google">Google</string>
     <string name="continue_with_google">Continue with Google</string>
     <string name="default_web_client_id">109144124141-7p0qvj8ji15dj199ievtcpmflp2c96t6.apps.googleusercontent.com</string>
+    <string name="forgot">Forgot?</string>
 </resources>

@@ -6,53 +6,21 @@
     android:layout_height="match_parent"
     android:background="@color/background_dark"
     android:padding="24dp"
-    tools:context=".presentation.auth.login.view.LoginFragment">
-
-    <TextView
-        android:id="@+id/tvHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="@string/meal_planner"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardIcon"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="45dp"
-        app:cardBackgroundColor="@color/secondary"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvHeader">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_restaurant"
-            app:tint="@color/primary" />
-    </androidx.cardview.widget.CardView>
+    tools:context=".presentation.auth.signIn.view.SignInFragment">
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/master_your_menu"
+        android:layout_marginTop="100dp"
+        android:text="@string/mealwise"
         android:textColor="@color/white"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardIcon" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/tvSubtitle"
@@ -143,9 +111,8 @@
             android:layout_height="wrap_content"
 
             android:background="@null"
-
-
-            android:hint="chef@example.com"
+            android:textColor="@color/light_text"
+            android:hint="@string/chef_example_com"
             android:textColorHint="@color/light_gray"
             android:inputType="textEmailAddress"
             android:padding="16dp" />
@@ -157,7 +124,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Password"
+        android:text="@string/password"
         android:textColor="@color/gray"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -167,7 +134,7 @@
         android:id="@+id/tvForgot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Forgot?"
+        android:text="@string/forgot"
         android:textColor="@color/primary"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@id/tvLabelPassword"
@@ -200,65 +167,86 @@
             android:layout_height="wrap_content"
 
             android:background="@null"
-
-            android:hint="••••••••"
+            android:textColor="@color/light_text"
+            android:hint="@string/password_hint"
             android:inputType="textPassword"
             android:textColorHint="@color/light_gray"
             android:padding="16dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="16dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/primary"
+        android:padding="16dp"
         android:text="@string/login"
         android:textColor="@color/background_dark"
         android:textSize="16sp"
         android:textStyle="bold"
         app:cornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tlPassword" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:elevation="10dp"
+        android:indeterminateTint="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/btnLogin"
+        app:layout_constraintEnd_toEndOf="@id/btnLogin"
+        app:layout_constraintStart_toStartOf="@id/btnLogin"
+        app:layout_constraintTop_toTopOf="@id/btnLogin" />
 
 
 
     <LinearLayout
-        android:id="@+id/layoutOr"
-        android:layout_width="match_parent"
+        android:id="@+id/layoutGoogleSignIn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:gravity="center"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+
+        android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:padding="8dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnLogin">
 
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="Google Logo"
+            android:src="@drawable/ic_google" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:text="@string/or_continue_with"
-            android:textColor="@color/gray"
-            android:textSize="14sp" />
+            android:layout_marginStart="12dp"
+            android:text="@string/continue_with_google"
+            android:textColor="@color/light_text"
+            android:textSize="14sp"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:text="@string/facebook"
-            android:textStyle="bold"
-            android:clickable="true"
-            android:textColor="@color/blue"
-            android:textSize="16sp" />
-
+            android:textStyle="bold" />
     </LinearLayout>
+
 
     <TextView
         android:id="@+id/tvGuest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="30dp"
         android:drawablePadding="8dp"
         android:gravity="center"
         android:text="@string/continue_as_guest"
@@ -267,8 +255,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutOr"
-        app:layout_constraintVertical_bias="0.88" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

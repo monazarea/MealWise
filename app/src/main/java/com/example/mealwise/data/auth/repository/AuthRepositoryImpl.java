@@ -2,6 +2,7 @@ package com.example.mealwise.data.auth.repository;
 
 import com.example.mealwise.data.auth.datasource.AuthRemoteDataSource;
 import com.example.mealwise.data.auth.datasource.helpers.FirestoreHelper;
+import com.example.mealwise.data.auth.models.SignInRequest;
 import com.example.mealwise.data.auth.models.SignUpRequest;
 import com.example.mealwise.data.auth.models.User;
 
@@ -31,5 +32,10 @@ public class AuthRepositoryImpl implements AuthRepository {
     @Override
     public Completable signInWithGoogle(String idToken) {
         return remoteDataSource.googleSignIn(idToken);
+    }
+
+    @Override
+    public Completable signIn(SignInRequest signInRequest) {
+        return remoteDataSource.signIn(signInRequest);
     }
 }
