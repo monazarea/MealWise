@@ -162,6 +162,7 @@ public class SignUpFragment extends Fragment implements SignUpView {
     public void onDestroyView() {
         super.onDestroyView();
         presenter.onDestroy();
+        disposables.clear();
     }
     private void clearErrors() {
         tlUsername.setError(null);
@@ -175,6 +176,7 @@ public class SignUpFragment extends Fragment implements SignUpView {
 
         tlConfirmPassword.setError(null);
         tlConfirmPassword.setErrorEnabled(false);
+
     }
 
     private void clearErrorOnTyping(TextInputLayout layout, TextInputEditText editText) {
