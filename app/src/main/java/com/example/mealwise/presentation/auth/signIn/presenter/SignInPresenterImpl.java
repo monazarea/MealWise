@@ -1,45 +1,40 @@
-package com.example.mealwise.presentation.auth.signUp.presenter;
+package com.example.mealwise.presentation.auth.signIn.presenter;
 
-import com.example.mealwise.data.auth.models.SignUpRequest;
+import com.example.mealwise.data.auth.models.SignInRequest;
 import com.example.mealwise.data.auth.repository.AuthRepository;
 import com.example.mealwise.presentation.auth.base.BaseAuthPresenterImpl;
-import com.example.mealwise.presentation.auth.signUp.view.SignUpView;
+import com.example.mealwise.presentation.auth.signIn.view.SignInView;
 import com.example.mealwise.utils.ValidationUtils;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class SignUpPresenterImpl extends BaseAuthPresenterImpl<SignUpView> implements SignUpPresenter{
+public class SignInPresenterImpl extends BaseAuthPresenterImpl<SignInView> implements SignInPresenter {
 
-
-
-    public SignUpPresenterImpl(SignUpView view, AuthRepository repository) {
+    public SignInPresenterImpl(SignInView view, AuthRepository repository) {
         super(view, repository);
     }
     @Override
-    public void registerWithEmailAndPassword(String username, String email, String password, String confirmPassword) {
-        if(!validateAllFields(username, email, password, confirmPassword))
+    public void signInWithEmailAndPassword(String email, String password) {
+        if (!validateAllFields(email, password))
             return;
 
-        SignUpRequest request = new SignUpRequest(username, email, password);
+        SignInRequest request = new SignInRequest(email, password);
         view.showButtonLoading();
 
-        performSignUpWithEmailAndPassword(request);
+        performSignInWithEmailAndPassword(request);
     }
 
 
-
-
-    private void performSignUpWithEmailAndPassword(SignUpRequest request){
+    private void performSignInWithEmailAndPassword(SignInRequest request) {
         disposables.add(
-                repository.signUp(request)
+                repository.signIn(request)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 () -> {
                                     view.hideLoading();
-                                    view.showSuccess();
                                     view.navigateToHome();
                                 },
                                 error -> {
@@ -51,15 +46,8 @@ public class SignUpPresenterImpl extends BaseAuthPresenterImpl<SignUpView> imple
     }
 
 
-
-    private boolean validateAllFields(String username, String email, String password, String confirmPassword) {
+    private boolean validateAllFields(String email, String password) {
         boolean isValid = true;
-
-        String nameError = ValidationUtils.getUsernameError(username);
-        if (nameError != null) {
-            view.showNameError(nameError);
-            isValid = false;
-        }
 
         String emailError = ValidationUtils.getEmailError(email);
         if (emailError != null) {
@@ -70,12 +58,6 @@ public class SignUpPresenterImpl extends BaseAuthPresenterImpl<SignUpView> imple
         String passwordError = ValidationUtils.getPasswordError(password);
         if (passwordError != null) {
             view.showPasswordError(passwordError);
-            isValid = false;
-        }
-
-        String confirmError = ValidationUtils.getConfirmPasswordError(password, confirmPassword);
-        if (confirmError != null) {
-            view.showConfirmPasswordError(confirmError);
             isValid = false;
         }
 

@@ -2,12 +2,11 @@ package com.example.mealwise.data.auth.datasource;
 
 import com.example.mealwise.data.auth.datasource.helpers.FirebaseHelper;
 import com.example.mealwise.data.auth.datasource.helpers.FirestoreHelper;
+import com.example.mealwise.data.auth.models.SignInRequest;
 import com.example.mealwise.data.auth.models.SignUpRequest;
 import com.example.mealwise.data.auth.models.User;
-import com.google.firebase.auth.FirebaseUser;
 
 import io.reactivex.rxjava3.core.Completable;
-import io.reactivex.rxjava3.core.Single;
 
 public class AuthRemoteDataSourceImp implements AuthRemoteDataSource {
 
@@ -53,6 +52,14 @@ public class AuthRemoteDataSourceImp implements AuthRemoteDataSource {
                     return firestoreHelper.saveUser(user);
                 });
     }
+
+    @Override
+    public Completable signIn(SignInRequest signInRequest) {
+        return authHelper.signIn(signInRequest)
+                .ignoreElement();
+    }
+
+
 
 
 }
