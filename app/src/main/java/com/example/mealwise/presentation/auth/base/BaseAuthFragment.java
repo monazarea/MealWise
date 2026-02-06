@@ -34,13 +34,14 @@ public abstract class BaseAuthFragment<P extends BaseAuthPresenter> extends Frag
         initViews(view);
         presenter = createPresenter();
 
-        String webClientId = getString(R.string.default_web_client_id);
-        googleAuthManager = new GoogleAuthManager(requireContext(), webClientId);
-
         setupListeners();
     }
 
     protected void signInWithGoogleFlow() {
+        if (googleAuthManager == null) {
+            String webClientId = getString(R.string.default_web_client_id);
+            googleAuthManager = new GoogleAuthManager(requireContext(), webClientId);
+        }
         disposables.add(
                 googleAuthManager.signIn()
                         .subscribe(

@@ -27,6 +27,9 @@ roomCompiler = "2.8.4"
 roomRuntime = "2.8.4"
 rxandroid = "3.0.2"
 rxjava = "3.1.12"
+retrofitAdapterRxJava = "3.0.0"
+roomRxJava = "2.8.4"
+shimmer = "0.5.0"
 
 [libraries]
 androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "credentialsPlayServicesAuth" }
@@ -62,6 +65,9 @@ recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 rxandroid = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxandroid" }
 rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava" }
+retrofit-adapter-rxjava = { group = "com.squareup.retrofit2", name = "adapter-rxjava3", version.ref = "retrofitAdapterRxJava" }
+room-rxjava3 = { group = "androidx.room", name = "room-rxjava3", version.ref = "roomRxJava" }
+shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
 
 
 [plugins]

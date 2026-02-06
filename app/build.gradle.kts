@@ -66,6 +66,9 @@ dependencies {
     implementation(libs.androidx.credentials.v130)
     implementation(libs.androidx.credentials.play.services.auth.v130)
     implementation(libs.googleid.v111)
+    implementation(libs.retrofit.adapter.rxjava)
+    implementation(libs.room.rxjava3)
+    implementation(libs.shimmer)
 
 
 

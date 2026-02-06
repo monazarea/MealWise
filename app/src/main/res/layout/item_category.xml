@@ -7,19 +7,23 @@
     android:orientation="vertical"
     android:padding="8dp">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardCategory"
         android:layout_width="70dp"
         android:layout_height="70dp"
         app:cardCornerRadius="35dp"
         app:cardElevation="0dp"
-        app:cardBackgroundColor="@color/primary">
-
+        app:cardBackgroundColor="@android:color/transparent"
+        app:strokeWidth="3dp"
+        app:strokeColor="@color/selector_category_border">
         <ImageView
             android:id="@+id/ivCategory"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:padding="3dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background" /> </androidx.cardview.widget.CardView>
+            android:src="@drawable/ic_launcher_background" />
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/tvCategoryName"
@@ -27,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Beef"
-        android:textColor="@color/white"
+        android:textColor="@color/selector_category_text"
         android:textSize="14sp"
         android:fontFamily="sans-serif-medium"/>
 </LinearLayout>

@@ -43,7 +43,6 @@ public class AuthRepositoryImpl implements AuthRepository {
     }
     public User getCurrentUser() {
         FirebaseUser firebaseUser = remoteDataSource.getCurrentUser();
-        Log.d("tag",firebaseUser.toString());
 
         if (firebaseUser != null) {
             return new User(
