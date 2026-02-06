@@ -17,6 +17,7 @@ import com.example.mealwise.R;
 import com.example.mealwise.data.auth.datasource.AuthRemoteDataSourceImp;
 import com.example.mealwise.data.auth.datasource.helpers.SharedPrefHelper;
 import com.example.mealwise.data.auth.repository.AuthRepositoryImpl;
+import com.example.mealwise.di.Injection;
 import com.example.mealwise.presentation.splash.presenter.SplashPresenter;
 import com.example.mealwise.presentation.splash.presenter.SplashPresenterImpl;
 
@@ -35,12 +36,12 @@ public class SplashFragment extends Fragment implements  SplashView {
         super.onViewCreated(view, savedInstanceState);
         requireActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        SharedPrefHelper prefManager = SharedPrefHelper.getInstance(requireContext());
-        AuthRemoteDataSourceImp remoteDataSource = AuthRemoteDataSourceImp.getInstance();
-        AuthRepositoryImpl repository = AuthRepositoryImpl.getInstance(remoteDataSource);
 
-        presenter = new SplashPresenterImpl(this, prefManager,repository);
-
+        presenter = new SplashPresenterImpl(
+                this,
+                Injection.provideSharedPrefHelper(requireContext()),
+                Injection.provideAuthRepository()
+        );
         presenter.checkNavigationLogic();
     }
 
@@ -65,7 +66,9 @@ public class SplashFragment extends Fragment implements  SplashView {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        presenter.onDestroy();
+        if (presenter != null) {
+            presenter.onDestroy();
+        }
         requireActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 }

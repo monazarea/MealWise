@@ -16,6 +16,7 @@ import com.example.mealwise.R;
 import com.example.mealwise.data.auth.datasource.AuthRemoteDataSourceImp;
 import com.example.mealwise.data.auth.datasource.helpers.SharedPrefHelper;
 import com.example.mealwise.data.auth.repository.AuthRepositoryImpl;
+import com.example.mealwise.di.Injection;
 import com.example.mealwise.presentation.auth.base.BaseAuthFragment;
 import com.example.mealwise.presentation.auth.signIn.presenter.SignInPresenter;
 import com.example.mealwise.presentation.auth.signIn.presenter.SignInPresenterImpl;
@@ -39,9 +40,7 @@ public class SignInFragment extends BaseAuthFragment<SignInPresenter> implements
 
     @Override
     protected SignInPresenter createPresenter() {
-        AuthRemoteDataSourceImp remoteDataSource = AuthRemoteDataSourceImp.getInstance();
-        AuthRepositoryImpl repository = AuthRepositoryImpl.getInstance(remoteDataSource);
-        return new SignInPresenterImpl(this, repository);
+        return new SignInPresenterImpl(this, Injection.provideAuthRepository());
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.example.mealwise.data.auth.datasource;
 
+import android.util.Log;
+
 import com.example.mealwise.data.auth.datasource.helpers.FirebaseHelper;
 import com.example.mealwise.data.auth.datasource.helpers.FirestoreHelper;
 import com.example.mealwise.data.auth.models.SignInRequest;
