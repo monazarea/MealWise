@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.example.mealwise.R;
+import com.example.mealwise.data.auth.datasource.AuthRemoteDataSourceImp;
 import com.example.mealwise.data.auth.datasource.helpers.SharedPrefHelper;
+import com.example.mealwise.data.auth.repository.AuthRepositoryImpl;
 import com.example.mealwise.presentation.splash.presenter.SplashPresenter;
 import com.example.mealwise.presentation.splash.presenter.SplashPresenterImpl;
 
@@ -34,7 +36,10 @@ public class SplashFragment extends Fragment implements  SplashView {
         requireActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         SharedPrefHelper prefManager = SharedPrefHelper.getInstance(requireContext());
-        presenter = new SplashPresenterImpl(this, prefManager);
+        AuthRemoteDataSourceImp remoteDataSource = AuthRemoteDataSourceImp.getInstance();
+        AuthRepositoryImpl repository = AuthRepositoryImpl.getInstance(remoteDataSource);
+
+        presenter = new SplashPresenterImpl(this, prefManager,repository);
 
         presenter.checkNavigationLogic();
     }
@@ -46,7 +51,7 @@ public class SplashFragment extends Fragment implements  SplashView {
     }
 
     @Override
-    public void navigateToAuth() {
+    public void navigateToSignIn() {
         NavController navController = Navigation.findNavController(requireView());
         navController.navigate(R.id.action_splashFragment_to_loginFragment);
     }
@@ -54,7 +59,7 @@ public class SplashFragment extends Fragment implements  SplashView {
     @Override
     public void navigateToOnboarding() {
         // todo i will change after add onBoarding screens
-        navigateToAuth();
+        navigateToSignIn();
 
     }
 

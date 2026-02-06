@@ -142,6 +142,7 @@ public class SignUpFragment extends BaseAuthFragment<SignUpPresenter> implements
 
     @Override
     public void navigateToHome() {
+        SharedPrefHelper.getInstance(requireContext()).setGuestMode(false);
         Navigation.findNavController(requireView()).navigate(R.id.action_signUpFragment_to_homeFragment);
     }
 

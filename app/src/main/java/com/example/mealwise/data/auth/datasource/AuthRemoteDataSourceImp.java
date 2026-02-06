@@ -5,6 +5,7 @@ import com.example.mealwise.data.auth.datasource.helpers.FirestoreHelper;
 import com.example.mealwise.data.auth.models.SignInRequest;
 import com.example.mealwise.data.auth.models.SignUpRequest;
 import com.example.mealwise.data.auth.models.User;
+import com.google.firebase.auth.FirebaseUser;
 
 import io.reactivex.rxjava3.core.Completable;
 
@@ -60,6 +61,17 @@ public class AuthRemoteDataSourceImp implements AuthRemoteDataSource {
     }
 
 
+    @Override
+    public FirebaseUser getCurrentUser() {
+        return authHelper.getCurrentUser();
+    }
 
-
+    @Override
+    public Completable signOut() {
+        return Completable.fromAction(() -> {
+            //authHelper.signOut();
+        });
+    }
 }
+
+

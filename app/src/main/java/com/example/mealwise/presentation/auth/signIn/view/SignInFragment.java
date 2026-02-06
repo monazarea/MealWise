@@ -112,6 +112,7 @@ public class SignInFragment extends BaseAuthFragment<SignInPresenter> implements
 
     @Override
     public void navigateToHome() {
+        SharedPrefHelper.getInstance(requireContext()).setGuestMode(false);
         NavController navController = Navigation.findNavController(requireView());
         navController.navigate(R.id.action_loginFragment_to_homeFragment);
     }
