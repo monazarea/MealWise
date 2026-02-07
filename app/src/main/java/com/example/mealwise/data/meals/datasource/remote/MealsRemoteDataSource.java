@@ -41,4 +41,7 @@ public class MealsRemoteDataSource {
     public Single<MealResponse> getMealsByArea(String categoryName){
         return mealsService.getMealsByArea(categoryName);
     }
+    public Single<MealResponse>getMealDetails(String id){
+        return mealsService.getMealDetails(id);
+    }
 }

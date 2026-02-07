@@ -139,7 +139,9 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
     }
     @Override
     public void navigateToDetails(Meal meal) {
-        Toast.makeText(requireContext(), "Clicked: " + meal.getName(), Toast.LENGTH_SHORT).show();
+        HomeFragmentDirections.ActionHomeFragmentToDetailsFragment action =
+                HomeFragmentDirections.actionHomeFragmentToDetailsFragment(meal);
+        Navigation.findNavController(requireView()).navigate(action);
     }
     @Override
     public void navigateToSeeAll(String categoryName) {
@@ -168,6 +170,5 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
 
     @Override
     public void onMealClick(Meal meal) {
-        Toast.makeText(requireContext(), "Meal: " + meal.getName(), Toast.LENGTH_SHORT).show();
-    }
+        navigateToDetails(meal);    }
 }
