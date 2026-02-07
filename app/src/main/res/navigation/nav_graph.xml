@@ -54,10 +54,27 @@
         <action
             android:id="@+id/action_homeFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_mealsListFragment"
+            app:destination="@id/mealsListFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.mealwise.presentation.details.view.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" />
+    <fragment
+        android:id="@+id/mealsListFragment"
+        android:name="com.example.mealwise.presentation.mealslist.view.MealsListFragment"
+        android:label="MealsListFragment">
+
+        <argument
+            android:name="type"
+            app:argType="integer" />
+
+        <argument
+            android:name="name"
+            app:argType="string" />
+
+    </fragment>
 </navigation>

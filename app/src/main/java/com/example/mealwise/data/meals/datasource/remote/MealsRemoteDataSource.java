@@ -33,4 +33,12 @@ public class MealsRemoteDataSource {
     public Single<MealResponse> getMealsByCategory(String categoryName){
         return mealsService.getMealsByCategory(categoryName);
     }
+
+    public Single<MealResponse> getMealsByIngredient(String categoryName){
+        return mealsService.getMealsByIngredient(categoryName);
+    }
+
+    public Single<MealResponse> getMealsByArea(String categoryName){
+        return mealsService.getMealsByArea(categoryName);
+    }
 }

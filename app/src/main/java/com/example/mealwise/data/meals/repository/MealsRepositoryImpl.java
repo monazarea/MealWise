@@ -35,4 +35,14 @@ public class MealsRepositoryImpl implements MealsRepository {
     public Single<MealResponse> getMealsByCategory(String categoryName) {
         return remoteDataSource.getMealsByCategory(categoryName);
     }
+
+    @Override
+    public Single<MealResponse> getMealsByArea(String areaName) {
+        return remoteDataSource.getMealsByArea(areaName);
+    }
+
+    @Override
+    public Single<MealResponse> getMealsByIngredient(String ingredientName) {
+        return remoteDataSource.getMealsByIngredient(ingredientName);
+    }
 }
