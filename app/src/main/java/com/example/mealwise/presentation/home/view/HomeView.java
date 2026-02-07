@@ -12,4 +12,6 @@ public interface HomeView {
     void showCategories(List<Category> categories);
     void showMealsByCategory(List<Meal> meals,String categoryName);
     void showError(String message);
+    void navigateToDetails(Meal meal);
+    void navigateToSeeAll(String categoryName);
 }

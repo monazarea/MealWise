@@ -39,15 +39,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupNavVisibility() {
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if (destination.getId() == R.id.splashFragment
-                    || destination.getId() == R.id.loginFragment
-                    || destination.getId() == R.id.signUpFragment) {
+            if (destination.getId() == R.id.homeFragment
+                    || destination.getId() == R.id.favoritesFragment) {
 
-                bottomNav.setVisibility(View.GONE);
-                navDivider.setVisibility(View.GONE);
-            } else {
                 bottomNav.setVisibility(View.VISIBLE);
                 navDivider.setVisibility(View.VISIBLE);
+            } else {
+                bottomNav.setVisibility(View.GONE);
+                navDivider.setVisibility(View.GONE);
             }
         });
     }

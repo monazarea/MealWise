@@ -11,6 +11,10 @@ public interface MealsRepository {
 
     Single<MealResponse> getMealsByCategory(String categoryName);
 
+    Single<MealResponse> getMealsByArea(String areaName);
+
+    Single<MealResponse> getMealsByIngredient(String ingredientName);
+
 
 
 }

@@ -25,6 +25,8 @@ import com.example.mealwise.data.meals.models.Category;
 import com.example.mealwise.data.meals.models.Meal;
 import com.example.mealwise.di.Injection;
 import com.example.mealwise.presentation.home.presenter.HomePresenterImpl;
+import com.example.mealwise.utils.AlertUtils;
+import com.example.mealwise.utils.Constants;
 import com.example.mealwise.utils.ImageLoader;
 import com.facebook.shimmer.Shimmer;
 import com.facebook.shimmer.ShimmerDrawable;
@@ -47,7 +49,8 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
     private MealsAdapter mealsAdapter;
     private RecyclerView rvCategories;
     private RecyclerView rvMeals;
-    private TextView tvCategoryTitle;
+    private TextView tvCategoryTitle,tvSeeAllMeals;
+    private String currentCategoryName = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,11 +61,16 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         initViews(view);
 
         presenter = new HomePresenterImpl(this, Injection.provideMealsRepository());
         presenter.getHomeData();
+        tvSeeAllMeals.setOnClickListener(v -> {
+            if (currentCategoryName != null && !currentCategoryName.isEmpty()) {
+                navigateToSeeAll(currentCategoryName);
+            }
+        });
+
     }
 
     private void initViews(View view) {
@@ -77,6 +85,7 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
         rvCategories = view.findViewById(R.id.rvCategories);
         rvMeals = view.findViewById(R.id.rvMeals);
         tvCategoryTitle = view.findViewById(R.id.tvCategoryTitle);
+        tvSeeAllMeals = view.findViewById(R.id.tvSeeAllMeals);
     }
 
     @Override
@@ -114,6 +123,7 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
 
     @Override
     public void showMealsByCategory(List<Meal> meals,String categoryName) {
+        this.currentCategoryName = categoryName;
         tvCategoryTitle.setText(categoryName);
         mealsAdapter = new MealsAdapter(requireContext(), meals, this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
@@ -125,12 +135,21 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
     @Override
     public void showError(String message) {
         hideLoading();
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+        AlertUtils.showErrorSnackBar(getView(), message);
     }
-
-    private void navigateToDetails(Meal meal) {
-
+    @Override
+    public void navigateToDetails(Meal meal) {
         Toast.makeText(requireContext(), "Clicked: " + meal.getName(), Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void navigateToSeeAll(String categoryName) {
+        HomeFragmentDirections.ActionHomeFragmentToMealsListFragment action =
+                HomeFragmentDirections.actionHomeFragmentToMealsListFragment(
+                        Constants.TYPE_CATEGORY,
+                        categoryName
+                );
+
+        Navigation.findNavController(requireView()).navigate(action);
     }
 
     @Override
