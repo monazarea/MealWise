@@ -15,6 +15,8 @@ public interface MealsRepository {
 
     Single<MealResponse> getMealsByIngredient(String ingredientName);
 
+    Single<MealResponse> getMealDetails(String id);
+
 
 
 }

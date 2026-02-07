@@ -24,4 +24,7 @@ public interface MealsService {
 
     @GET("filter.php")
     Single<MealResponse> getMealsByIngredient(@Query("i") String ingredient);
+
+    @GET("lookup.php")
+    Single<MealResponse> getMealDetails(@Query("i") String id);
 }

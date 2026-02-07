@@ -30,6 +30,7 @@ rxjava = "3.1.12"
 retrofitAdapterRxJava = "3.0.0"
 roomRxJava = "2.8.4"
 shimmer = "0.5.0"
+youtubePlayer = "12.1.0"
 
 [libraries]
 androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "credentialsPlayServicesAuth" }
@@ -68,7 +69,7 @@ rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava" }
 retrofit-adapter-rxjava = { group = "com.squareup.retrofit2", name = "adapter-rxjava3", version.ref = "retrofitAdapterRxJava" }
 room-rxjava3 = { group = "androidx.room", name = "room-rxjava3", version.ref = "roomRxJava" }
 shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
-
+android-youtube-player = { module = "com.pierfrancesco.soffritti.androidyoutubeplayer:core", version.ref = "youtubePlayer" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

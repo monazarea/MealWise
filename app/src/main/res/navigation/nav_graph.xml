@@ -62,7 +62,13 @@
         android:id="@+id/detailsFragment"
         android:name="com.example.mealwise.presentation.details.view.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details">
+
+        <argument
+            android:name="meal"
+            app:argType="com.example.mealwise.data.meals.models.Meal" />
+
+    </fragment>
     <fragment
         android:id="@+id/mealsListFragment"
         android:name="com.example.mealwise.presentation.mealslist.view.MealsListFragment"
