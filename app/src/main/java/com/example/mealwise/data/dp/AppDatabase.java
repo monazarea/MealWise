@@ -1,26 +1,26 @@
-//package com.example.mealwise.data.dp;
-//
-//import android.content.Context;
-//
-//import androidx.room.Database;
-//import androidx.room.Room;
-//import androidx.room.RoomDatabase;
-//
-//import com.example.designpatternforandroid.data.products.datasource.local.ProductsDao;
-//import com.example.designpatternforandroid.data.products.models.ProductsItem;
-//
-//@Database(entities = {ProductsItem.class},version = 1)
-//public abstract class AppDatabase extends RoomDatabase {
-//    public abstract ProductsDao productsDao();
-//
-//    private static AppDatabase INSTANCE;
-//
-//
-//    public static AppDatabase getInstance(Context context){
-//        if(INSTANCE == null){
-//            INSTANCE = Room.databaseBuilder(context,
-//                    AppDatabase.class, "ProductsDB").build();
-//        }
-//        return INSTANCE;
-//    }
-//}
+package com.example.mealwise.data.dp;
+
+import android.content.Context;
+
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+
+import com.example.mealwise.data.meals.datasource.local.MealsDao;
+import com.example.mealwise.data.meals.models.Meal;
+
+@Database(entities = {Meal.class}, version = 1, exportSchema = false)
+public abstract class AppDatabase extends RoomDatabase {
+
+    private static AppDatabase instance;
+
+    public abstract MealsDao mealsDao();
+
+    public static synchronized AppDatabase getInstance(Context context) {
+        if (instance == null) {
+            instance = Room.databaseBuilder(context.getApplicationContext(),
+                            AppDatabase.class, "mealwise_db").build();
+        }
+        return instance;
+    }
+}

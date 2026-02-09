@@ -1,5 +1,6 @@
 package com.example.mealwise.presentation.details.presenter;
 
+import com.example.mealwise.data.meals.models.Meal;
 import com.example.mealwise.data.meals.repository.MealsRepository;
 import com.example.mealwise.presentation.details.view.MealDetailsView;
 
@@ -12,6 +13,8 @@ public class MealDetailsPresenterImpl implements MealDetailsPresenter{
     private MealDetailsView view;
     private MealsRepository repository;
     private CompositeDisposable disposables = new CompositeDisposable();
+
+    private boolean isFavorite = false;
 
     public MealDetailsPresenterImpl(MealDetailsView view, MealsRepository repository) {
         this.view = view;
@@ -42,6 +45,77 @@ public class MealDetailsPresenterImpl implements MealDetailsPresenter{
         );
     }
 
+    @Override
+    public void checkFavoriteStatus(String mealId) {
+        disposables.add(
+                repository.isFavorite(mealId)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                isFav -> {
+                                    this.isFavorite = isFav;
+                                    view.updateFavoriteState(isFav);
+                                },
+                                error -> {}
+                        )
+        );
+    }
+
+    @Override
+    public void toggleFavorite(Meal meal) {
+        if (isFavorite) {
+            removeFromFavorites(meal);
+        } else {
+            addToFavorites(meal);
+        }
+    }
+
+    private void addToFavorites(Meal meal) {
+        disposables.add(
+                repository.addToFavorites(meal)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                () -> {
+                                    isFavorite = true;
+                                    view.updateFavoriteState(true);
+                                    view.showSuccessMessage("Added to Favorites");
+                                },
+                                error -> view.showError("Failed to add: " + error.getMessage())
+                        )
+        );
+    }
+
+    private void removeFromFavorites(Meal meal) {
+        disposables.add(
+                repository.removeFromFavorites(meal)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                () -> {
+                                    isFavorite = false;
+                                    view.updateFavoriteState(false);
+                                    view.showSuccessMessage("Removed from Favorites");
+                                },
+                                error -> view.showError("Failed to remove: " + error.getMessage())
+                        )
+        );
+    }
+
+    @Override
+    public void addToPlan(Meal meal, String dayOfWeek) {
+        disposables.add(
+                repository.addToPlan(meal, dayOfWeek)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                () -> view.showSuccessMessage("Added to Plan (" + dayOfWeek + ")"),
+                                error -> view.showError("Failed to plan: " + error.getMessage())
+                        )
+        );
+    }
+
+    @Override
     public void onDestroy() {
         disposables.clear();
     }

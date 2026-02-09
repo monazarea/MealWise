@@ -67,7 +67,7 @@ public class MealsListFragment extends Fragment implements MealsListView, MealsA
             tvPageTitle.setText(name + " Meals");
         }
 
-        presenter = new MealsListPresenterImpl(this, Injection.provideMealsRepository());
+        presenter = new MealsListPresenterImpl(this, Injection.provideMealsRepository(requireContext()));
 
         presenter.getMeals(type, name);
 
