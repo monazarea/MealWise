@@ -81,6 +81,7 @@
                     app:layout_constraintTop_toBottomOf="@id/cvHeroImage">
 
                     <ImageView
+                        android:id= "@+id/IvAddToPlan"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@drawable/bg_circle_filled"
@@ -93,6 +94,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1" />
                     <ImageView
+                        android:id= "@+id/IvAddToFav"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@drawable/bg_circle_filled"
@@ -159,6 +161,7 @@
                 app:layout_constraintTop_toBottomOf="@id/cvHeroImage">
 
                 <TextView
+                    android:id="@+id/tvIngredientsLabel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

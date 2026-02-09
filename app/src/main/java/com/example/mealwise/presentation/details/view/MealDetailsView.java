@@ -7,4 +7,8 @@ public interface MealDetailsView {
     void hideLoading();
     void showMealDetails(Meal meal);
     void showError(String message);
+
+    void updateFavoriteState(boolean isFavorite);
+
+    void showSuccessMessage(String message);
 }

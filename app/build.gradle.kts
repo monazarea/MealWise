@@ -69,9 +69,6 @@
         implementation(libs.retrofit.adapter.rxjava)
         implementation(libs.room.rxjava3)
         implementation(libs.shimmer)
-        implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:13.0.0")
-//        implementation(libs.android.youtube.player)
-
-
-
+        implementation(libs.core)
+       // implementation(libs.material.calendarview)
     }

@@ -43,7 +43,7 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealViewHold
         ImageLoader.loadImage(context, meal.getThumbUrl(), holder.ivMealThumb);
 
         holder.itemView.setOnClickListener(v -> {
-            if (listener != null) listener.onMealClick(meal);
+            if (listener != null) listener. onMealClick(meal);
         });
     }
 

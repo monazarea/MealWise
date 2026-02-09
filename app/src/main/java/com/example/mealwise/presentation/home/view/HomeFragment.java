@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
 
-        presenter = new HomePresenterImpl(this, Injection.provideMealsRepository());
+        presenter = new HomePresenterImpl(this, Injection.provideMealsRepository(requireContext()));
         presenter.getHomeData();
         tvSeeAllMeals.setOnClickListener(v -> {
             if (currentCategoryName != null && !currentCategoryName.isEmpty()) {
