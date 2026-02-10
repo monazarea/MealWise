@@ -32,6 +32,9 @@ public class MealsLocalDataSource {
     public Completable insertMeal(Meal meal) {
         return dao.insertMeal(meal);
     }
+    public Completable insertMeals(List<Meal> meals) {
+        return dao.insertAllMeals(meals);
+    }
 
     public Completable deleteMeal(Meal meal) {
         return dao.deleteMeal(meal);
@@ -39,6 +42,9 @@ public class MealsLocalDataSource {
 
     public Completable deleteFavoriteById(String id, String userId) {
         return dao.deleteFavoriteById(id, userId);
+    }
+    public Completable deleteAllFavorites(String userId){
+        return  dao.deleteAllFavorites(userId);
     }
 
 

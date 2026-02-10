@@ -137,13 +137,13 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
         hideLoading();
         AlertUtils.showErrorSnackBar(getView(), message);
     }
-    @Override
+
     public void navigateToDetails(Meal meal) {
         HomeFragmentDirections.ActionHomeFragmentToDetailsFragment action =
                 HomeFragmentDirections.actionHomeFragmentToDetailsFragment(meal);
         Navigation.findNavController(requireView()).navigate(action);
     }
-    @Override
+
     public void navigateToSeeAll(String categoryName) {
         HomeFragmentDirections.ActionHomeFragmentToMealsListFragment action =
                 HomeFragmentDirections.actionHomeFragmentToMealsListFragment(

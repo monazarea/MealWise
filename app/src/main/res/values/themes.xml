@@ -30,6 +30,10 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="RoundedImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item> </style>
+
     <style name="CalenderWeekDayText" parent="TextAppearance.AppCompat.Small">
         <item name="android:textColor">@color/more_light_green</item> <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>

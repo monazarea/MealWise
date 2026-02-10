@@ -83,4 +83,12 @@
             app:argType="string" />
 
     </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment3"
+        android:name="com.example.mealwise.presentation.fav.view.FavoritesFragment"
+        android:label="FavoritesFragment" >
+        <action
+            android:id="@+id/action_favoritesFragment3_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
 </navigation>

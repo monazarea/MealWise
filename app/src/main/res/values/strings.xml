@@ -42,4 +42,5 @@
     <string name="forgot">Forgot?</string>
     <string name="no_meals_found">No meals found</string>
     <string name="meals">Meals</string>
+    <string name="no_favorite_meals_yet_ntime_to_explore">No favorite meals yet!\nTime to explore? 😋</string>
 </resources>

@@ -32,4 +32,11 @@ public interface MealsDao {
 
     @Query("DELETE FROM meals_table WHERE id = :apiId AND type = 'FAVORITE' AND userId = :userId")
     Completable deleteFavoriteById(String apiId, String userId);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    Completable insertAllMeals(List<Meal> meals);
+
+    @Query("DELETE FROM meals_table WHERE type = 'FAVORITE' AND userId = :userId")
+    Completable deleteAllFavorites(String userId);
+
 }
