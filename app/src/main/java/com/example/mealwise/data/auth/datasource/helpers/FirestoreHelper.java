@@ -5,7 +5,10 @@ import com.example.mealwise.data.meals.models.Meal;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.List;
+
 import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Single;
 
 public class FirestoreHelper {
 
@@ -93,6 +96,26 @@ public class FirestoreHelper {
                     })
                     .addOnFailureListener(e -> {
                         if (!emitter.isDisposed()) emitter.onError(e);
+                    });
+        });
+    }
+
+    public Single<List<Meal>> getMeals(String userId) {
+        return Single.create(emitter -> {
+            db.collection("users")
+                    .document(userId)
+                    .collection("meals")
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        if (!emitter.isDisposed()) {
+                            List<Meal> meals = queryDocumentSnapshots.toObjects(Meal.class);
+                            emitter.onSuccess(meals);
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        if (!emitter.isDisposed()) {
+                            emitter.onError(e);
+                        }
                     });
         });
     }

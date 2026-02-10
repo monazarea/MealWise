@@ -1,9 +1,11 @@
 package com.example.mealwise.data.meals.models;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import com.google.firebase.firestore.Exclude;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -14,7 +16,6 @@ import java.util.List;
         indices = {@Index(value = {"id", "dayOfWeek", "type", "userId"}, unique = true)}
 )
 public class Meal implements Serializable {
-
 
     @PrimaryKey(autoGenerate = true)
     private int uniqueId;
@@ -460,7 +461,8 @@ public class Meal implements Serializable {
     public String getThumbUrl() { return thumbUrl; }
     public String getYoutubeUrl() { return youtubeUrl; }
     public String getSourceUrl() { return sourceUrl; }
-
+    @Exclude
+    @Ignore
     public List<Ingredient> getIngredients() {
         List<Ingredient> list = new ArrayList<>();
 

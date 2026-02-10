@@ -69,8 +69,8 @@ public class MealsRepositoryImpl implements MealsRepository {
         String userId = getCurrentUserId();
         if (userId == null) return Completable.error(new Throwable("User not logged in"));
 
-        meal.setUserId(userId);
         meal.setType("FAVORITE");
+        meal.setUserId(userId);
 
         return localDataSource.insertMeal(meal)
                 .andThen(firestoreHelper.insertMeal(meal));
@@ -97,7 +97,30 @@ public class MealsRepositoryImpl implements MealsRepository {
         String userId = getCurrentUserId();
         if (userId == null) return Flowable.empty();
 
-        return localDataSource.getFavoriteMeals(userId);
+        Flowable<List<Meal>> localData = localDataSource.getFavoriteMeals(userId);
+
+        Completable syncFromFirestore = firestoreHelper.getMeals(userId)
+                .flatMapCompletable(meals -> {
+                    for (Meal meal : meals) {
+                        meal.setUserId(userId);
+                        if (meal.getType() == null || meal.getType().isEmpty()) {
+                            if (meal.getDayOfWeek() != null && !meal.getDayOfWeek().isEmpty()) {
+                                meal.setType("PLAN");
+                            } else {
+                                meal.setType("FAVORITE");
+                            }
+                        }
+                    }
+                    return localDataSource.deleteAllFavorites(userId)
+                            .andThen(localDataSource.insertMeals(meals));
+                })
+                .onErrorComplete();
+
+        return localData.doOnSubscribe(subscription -> {
+            syncFromFirestore
+                    .subscribeOn(io.reactivex.rxjava3.schedulers.Schedulers.io())
+                    .subscribe();
+        });
     }
 
     @Override

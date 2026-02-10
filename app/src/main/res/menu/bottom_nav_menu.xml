@@ -11,7 +11,7 @@
         android:title="@string/planner" />
 
     <item
-        android:id="@+id/favoritesFragment"
+        android:id="@+id/favoritesFragment3"
         android:icon="@drawable/ic_favorite"
         android:title="@string/favorites" />
 

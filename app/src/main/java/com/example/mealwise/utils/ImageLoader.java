@@ -29,7 +29,8 @@ public class ImageLoader {
         Glide.with(context)
                 .load(url)
                 .placeholder(getShimmerDrawable())
-                .error(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_restaurant)
+                .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageView);
     }
