@@ -44,13 +44,14 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
     private TextView tvHeroTitle;
     private CardView cvMealOfDay;
     private Button btnViewRecipe;
-
+    private CardView searchContainer;
     private CategoriesAdapter categoriesAdapter;
     private MealsAdapter mealsAdapter;
     private RecyclerView rvCategories;
     private RecyclerView rvMeals;
     private TextView tvCategoryTitle,tvSeeAllMeals;
     private String currentCategoryName = "";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +71,9 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
                 navigateToSeeAll(currentCategoryName);
             }
         });
+        searchContainer.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_searchFragment);
+        });
 
     }
 
@@ -86,6 +90,7 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
         rvMeals = view.findViewById(R.id.rvMeals);
         tvCategoryTitle = view.findViewById(R.id.tvCategoryTitle);
         tvSeeAllMeals = view.findViewById(R.id.tvSeeAllMeals);
+        searchContainer = view.findViewById(R.id.searchContainer);
     }
 
     @Override

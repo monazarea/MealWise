@@ -37,6 +37,7 @@ public interface MealsRepository {
 
     Flowable<List<Meal>> getPlanByDay(String day);
 
+    Single<MealResponse> searchMealsByName(String mealName);
 
 
 }

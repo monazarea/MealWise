@@ -65,6 +65,11 @@ public class MealsRepositoryImpl implements MealsRepository {
     }
 
     @Override
+    public Single<MealResponse> searchMealsByName(String mealName) {
+        return remoteDataSource.searchMealsByName(mealName);
+    }
+
+    @Override
     public Completable addToFavorites(Meal meal) {
         String userId = getCurrentUserId();
         if (userId == null) return Completable.error(new Throwable("User not logged in"));

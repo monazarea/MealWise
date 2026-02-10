@@ -29,6 +29,10 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealViewHold
         this.listener = listener;
     }
 
+    public void setList(List<Meal> newMeals) {
+        this.meals = newMeals;
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public MealViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,8 +44,9 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealViewHold
     public void onBindViewHolder(@NonNull MealViewHolder holder, int position) {
         Meal meal = meals.get(position);
         holder.tvMealName.setText(meal.getName());
-        ImageLoader.loadImage(context, meal.getThumbUrl(), holder.ivMealThumb);
-
+        if (meal.getThumbUrl() != null) {
+            ImageLoader.loadImage(context, meal.getThumbUrl(), holder.ivMealThumb);
+        }
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) listener. onMealClick(meal);
         });
@@ -58,7 +63,8 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealViewHold
             super(itemView);
             ivMealThumb = itemView.findViewById(R.id.ivMealThumb);
             tvMealName = itemView.findViewById(R.id.tvMealName);
-            ivFavorite = itemView.findViewById(R.id.ivFavorite);
+            //ivFavorite = itemView.findViewById(R.id.ivFavorite);
         }
     }
+
 }
