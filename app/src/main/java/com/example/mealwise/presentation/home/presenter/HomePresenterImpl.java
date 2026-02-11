@@ -1,5 +1,6 @@
 package com.example.mealwise.presentation.home.presenter;
 
+import android.util.Log;
 import android.util.Pair;
 
 import com.example.mealwise.data.meals.models.Category;
@@ -39,6 +40,7 @@ public class HomePresenterImpl implements HomePresenter {
                         .subscribe(
                                 pair -> {
                                     view.hideLoading();
+                                    view.showContent();
                                     if (pair.first != null) {
                                         view.showRandomMeal(pair.first);
                                     }
@@ -49,7 +51,7 @@ public class HomePresenterImpl implements HomePresenter {
                                 },
                                 throwable -> {
                                     view.hideLoading();
-                                    view.showError(throwable.getMessage());
+                                    view.showNetworkError();
                                 }
                         )
         );

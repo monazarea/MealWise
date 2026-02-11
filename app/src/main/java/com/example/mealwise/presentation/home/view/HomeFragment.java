@@ -44,13 +44,16 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
     private TextView tvHeroTitle;
     private CardView cvMealOfDay;
     private Button btnViewRecipe;
-
+    private CardView searchContainer;
     private CategoriesAdapter categoriesAdapter;
     private MealsAdapter mealsAdapter;
     private RecyclerView rvCategories;
     private RecyclerView rvMeals;
     private TextView tvCategoryTitle,tvSeeAllMeals;
     private String currentCategoryName = "";
+    private View noInternetLayout;
+    private Button btnRetry;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +73,18 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
                 navigateToSeeAll(currentCategoryName);
             }
         });
+        searchContainer.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_searchFragment);
+        });
+
+        if (btnRetry != null) {
+            btnRetry.setOnClickListener(v -> {
+                if (noInternetLayout != null) noInternetLayout.setVisibility(View.GONE);
+                if (loadingView != null) loadingView.setVisibility(View.VISIBLE);
+
+                presenter.getHomeData();
+            });
+        }
 
     }
 
@@ -86,6 +101,13 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
         rvMeals = view.findViewById(R.id.rvMeals);
         tvCategoryTitle = view.findViewById(R.id.tvCategoryTitle);
         tvSeeAllMeals = view.findViewById(R.id.tvSeeAllMeals);
+        searchContainer = view.findViewById(R.id.searchContainer);
+        noInternetLayout = view.findViewById(R.id.noInternetLayout);
+        if (noInternetLayout != null) {
+            btnRetry = noInternetLayout.findViewById(R.id.btnRetry);
+        } else {
+            btnRetry = view.findViewById(R.id.btnRetry);
+        }
     }
 
     @Override
@@ -171,4 +193,16 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
     @Override
     public void onMealClick(Meal meal) {
         navigateToDetails(meal);    }
+    @Override
+    public void showNetworkError() {
+        homeContent.setVisibility(View.GONE);
+        loadingView.setVisibility(View.GONE);
+        noInternetLayout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showContent() {
+        noInternetLayout.setVisibility(View.GONE);
+        homeContent.setVisibility(View.VISIBLE);
+    }
 }

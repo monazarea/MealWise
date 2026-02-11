@@ -1,6 +1,8 @@
 package com.example.mealwise.data.meals.datasource.remote;
 
+import com.example.mealwise.data.meals.models.AreasResponse;
 import com.example.mealwise.data.meals.models.CategoriesResponse;
+import com.example.mealwise.data.meals.models.IngredientsResponse;
 import com.example.mealwise.data.meals.models.MealResponse;
 import com.example.mealwise.data.network.APIClient;
 
@@ -43,5 +45,17 @@ public class MealsRemoteDataSource {
     }
     public Single<MealResponse>getMealDetails(String id){
         return mealsService.getMealDetails(id);
+    }
+
+    public Single<MealResponse> searchMealsByName(String mealName) {
+        return mealsService.searchMealsByName(mealName);
+    }
+
+    public Single<AreasResponse> getAreasList() {
+        return mealsService.getAreasList();
+    }
+
+    public Single<IngredientsResponse> getIngredientsList() {
+        return mealsService.getIngredientsList();
     }
 }

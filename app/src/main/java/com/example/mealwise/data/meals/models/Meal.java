@@ -463,8 +463,8 @@ public class Meal implements Serializable {
     public String getSourceUrl() { return sourceUrl; }
     @Exclude
     @Ignore
-    public List<Ingredient> getIngredients() {
-        List<Ingredient> list = new ArrayList<>();
+    public List<IngredientAndMeasure> getIngredients() {
+        List<IngredientAndMeasure> list = new ArrayList<>();
 
         addIngredient(list, ingredient1, measure1);
         addIngredient(list, ingredient2, measure2);
@@ -490,9 +490,9 @@ public class Meal implements Serializable {
         return list;
     }
 
-    private void addIngredient(List<Ingredient> list, String name, String measure) {
+    private void addIngredient(List<IngredientAndMeasure> list, String name, String measure) {
         if (name != null && !name.trim().isEmpty()) {
-            list.add(new Ingredient(name, measure));
+            list.add(new IngredientAndMeasure(name, measure));
         }
     }
 }
