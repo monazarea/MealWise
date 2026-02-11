@@ -1,6 +1,8 @@
 package com.example.mealwise.data.meals.datasource.remote;
 
+import com.example.mealwise.data.meals.models.AreasResponse;
 import com.example.mealwise.data.meals.models.CategoriesResponse;
+import com.example.mealwise.data.meals.models.IngredientsResponse;
 import com.example.mealwise.data.meals.models.MealResponse;
 
 import io.reactivex.rxjava3.core.Observable;
@@ -30,4 +32,10 @@ public interface MealsService {
 
     @GET("search.php")
     Single<MealResponse> searchMealsByName(@Query("s") String mealName);
+
+    @GET("list.php?a=list")
+    Single<AreasResponse> getAreasList();
+
+    @GET("list.php?i=list")
+    Single<IngredientsResponse> getIngredientsList();
 }

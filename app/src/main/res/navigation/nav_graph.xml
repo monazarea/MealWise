@@ -84,6 +84,9 @@
         <argument
             android:name="name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_mealsListFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
 
     </fragment>
     <fragment
@@ -101,5 +104,8 @@
         <action
             android:id="@+id/action_searchFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_mealsListFragment"
+            app:destination="@id/mealsListFragment" />
     </fragment>
 </navigation>

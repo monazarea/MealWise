@@ -51,6 +51,8 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
     private RecyclerView rvMeals;
     private TextView tvCategoryTitle,tvSeeAllMeals;
     private String currentCategoryName = "";
+    private View noInternetLayout;
+    private Button btnRetry;
 
 
     @Override
@@ -75,6 +77,15 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
             Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_searchFragment);
         });
 
+        if (btnRetry != null) {
+            btnRetry.setOnClickListener(v -> {
+                if (noInternetLayout != null) noInternetLayout.setVisibility(View.GONE);
+                if (loadingView != null) loadingView.setVisibility(View.VISIBLE);
+
+                presenter.getHomeData();
+            });
+        }
+
     }
 
     private void initViews(View view) {
@@ -91,6 +102,12 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
         tvCategoryTitle = view.findViewById(R.id.tvCategoryTitle);
         tvSeeAllMeals = view.findViewById(R.id.tvSeeAllMeals);
         searchContainer = view.findViewById(R.id.searchContainer);
+        noInternetLayout = view.findViewById(R.id.noInternetLayout);
+        if (noInternetLayout != null) {
+            btnRetry = noInternetLayout.findViewById(R.id.btnRetry);
+        } else {
+            btnRetry = view.findViewById(R.id.btnRetry);
+        }
     }
 
     @Override
@@ -176,4 +193,16 @@ public class HomeFragment extends Fragment implements HomeView ,CategoriesAdapte
     @Override
     public void onMealClick(Meal meal) {
         navigateToDetails(meal);    }
+    @Override
+    public void showNetworkError() {
+        homeContent.setVisibility(View.GONE);
+        loadingView.setVisibility(View.GONE);
+        noInternetLayout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showContent() {
+        noInternetLayout.setVisibility(View.GONE);
+        homeContent.setVisibility(View.VISIBLE);
+    }
 }

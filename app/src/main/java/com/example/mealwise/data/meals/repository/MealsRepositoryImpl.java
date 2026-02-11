@@ -3,7 +3,9 @@ package com.example.mealwise.data.meals.repository;
 import com.example.mealwise.data.auth.datasource.helpers.FirestoreHelper;
 import com.example.mealwise.data.meals.datasource.local.MealsLocalDataSource;
 import com.example.mealwise.data.meals.datasource.remote.MealsRemoteDataSource;
+import com.example.mealwise.data.meals.models.AreasResponse;
 import com.example.mealwise.data.meals.models.CategoriesResponse;
+import com.example.mealwise.data.meals.models.IngredientsResponse;
 import com.example.mealwise.data.meals.models.Meal;
 import com.example.mealwise.data.meals.models.MealResponse;
 import com.google.firebase.auth.FirebaseAuth;
@@ -162,5 +164,16 @@ public class MealsRepositoryImpl implements MealsRepository {
             return FirebaseAuth.getInstance().getCurrentUser().getUid();
         }
         return null;
+    }
+
+
+    @Override
+    public Single<AreasResponse> getAreasList() {
+        return remoteDataSource.getAreasList();
+    }
+
+    @Override
+    public Single<IngredientsResponse> getIngredientsList() {
+        return remoteDataSource.getIngredientsList();
     }
 }

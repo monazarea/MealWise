@@ -12,5 +12,5 @@ public interface HomeView {
     void showCategories(List<Category> categories);
     void showMealsByCategory(List<Meal> meals,String categoryName);
     void showError(String message);
-
-}
+    void showNetworkError();
+    void showContent();}

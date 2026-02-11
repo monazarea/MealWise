@@ -87,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
-            app:selectionRequired="true"
+            app:selectionRequired="false"
             app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
@@ -95,22 +95,26 @@
                 style="@style/CustomChipStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Category" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipArea"
-                style="@style/CustomChipStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Area" />
+                android:text="Category"
+                app:checkedIconVisible="true"
+                app:checkedIconEnabled="true"
+                app:checkedIcon="@drawable/ic_check" /> <com.google.android.material.chip.Chip
+            android:id="@+id/chipArea"
+            style="@style/CustomChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Area"
+            app:checkedIconVisible="true"
+            app:checkedIcon="@drawable/ic_check" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipIngredient"
                 style="@style/CustomChipStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ingredient" />
+                android:text="Ingredient"
+                app:checkedIconVisible="true"
+                app:checkedIcon="@drawable/ic_check" />
 
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
@@ -164,5 +168,10 @@
             android:textSize="16sp"
             android:layout_marginTop="8dp"/>
     </LinearLayout>
+    <include
+        android:id="@+id/noInternetLayout"
+        layout="@layout/layout_no_internet"
+        android:visibility="gone"
+        android:elevation="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

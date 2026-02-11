@@ -10,21 +10,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.mealwise.R;
-import com.example.mealwise.data.meals.models.Ingredient;
+import com.example.mealwise.data.meals.models.IngredientAndMeasure;
 import com.example.mealwise.utils.ImageLoader;
 
-import java.util.Base64;
 import java.util.List;
 
 public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.ViewHolder> {
 
     private Context context;
-    private List<Ingredient> ingredients;
+    private List<IngredientAndMeasure> ingredients;
     String BASE_URL = "https://www.themealdb.com/images/ingredients/";
 
-    public IngredientsAdapter(Context context, List<Ingredient> ingredients) {
+    public IngredientsAdapter(Context context, List<IngredientAndMeasure> ingredients) {
         this.context = context;
         this.ingredients = ingredients;
     }
@@ -38,7 +36,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Ingredient ingredient = ingredients.get(position);
+        IngredientAndMeasure ingredient = ingredients.get(position);
 
         holder.tvName.setText(ingredient.getName());
         holder.tvMeasure.setText(ingredient.getMeasure());

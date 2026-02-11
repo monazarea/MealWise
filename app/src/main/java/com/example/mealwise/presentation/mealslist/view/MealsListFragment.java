@@ -121,11 +121,11 @@ public class MealsListFragment extends Fragment implements MealsListView, MealsA
 
     @Override
     public void onMealClick(Meal meal) {
-//
-//        MealsListFragmentDirections.ActionMealsListFragmentToDetailsFragment action =
-//                MealsListFragmentDirections.actionMealsListFragmentToDetailsFragment(meal);
-//
-//        Navigation.findNavController(requireView()).navigate(action);
+
+        MealsListFragmentDirections.ActionMealsListFragmentToDetailsFragment action =
+                MealsListFragmentDirections.actionMealsListFragmentToDetailsFragment(meal);
+
+        Navigation.findNavController(requireView()).navigate(action);
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.example.mealwise.data.meals.repository;
 
+import com.example.mealwise.data.meals.models.AreasResponse;
 import com.example.mealwise.data.meals.models.CategoriesResponse;
+import com.example.mealwise.data.meals.models.IngredientsResponse;
 import com.example.mealwise.data.meals.models.Meal;
 import com.example.mealwise.data.meals.models.MealResponse;
 
@@ -39,5 +41,8 @@ public interface MealsRepository {
 
     Single<MealResponse> searchMealsByName(String mealName);
 
+    Single<AreasResponse> getAreasList();
+
+    Single<IngredientsResponse> getIngredientsList();
 
 }
