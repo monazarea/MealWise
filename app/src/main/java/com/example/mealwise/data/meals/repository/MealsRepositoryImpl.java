@@ -1,6 +1,6 @@
 package com.example.mealwise.data.meals.repository;
 
-import com.example.mealwise.data.auth.datasource.helpers.FirestoreHelper;
+import com.example.mealwise.utils.helpers.FirestoreHelper;
 import com.example.mealwise.data.meals.datasource.local.MealsLocalDataSource;
 import com.example.mealwise.data.meals.datasource.remote.MealsRemoteDataSource;
 import com.example.mealwise.data.meals.models.AreasResponse;
@@ -15,6 +15,7 @@ import java.util.List;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MealsRepositoryImpl implements MealsRepository {
 
@@ -99,6 +100,8 @@ public class MealsRepositoryImpl implements MealsRepository {
         return localDataSource.isMealFavorite(mealId, userId);
     }
 
+
+
     @Override
     public Flowable<List<Meal>> getFavoriteMeals() {
         String userId = getCurrentUserId();
@@ -106,29 +109,37 @@ public class MealsRepositoryImpl implements MealsRepository {
 
         Flowable<List<Meal>> localData = localDataSource.getFavoriteMeals(userId);
 
-        Completable syncFromFirestore = firestoreHelper.getMeals(userId)
+        return localData.doOnSubscribe(subscription -> syncEverything(userId));
+    }
+
+    @Override
+    public Flowable<List<Meal>> getPlanByDay(String day) {
+        String userId = getCurrentUserId();
+        if (userId == null) return Flowable.empty();
+
+        Flowable<List<Meal>> localData = localDataSource.getMealsByDay(day, userId);
+
+        return localData.doOnSubscribe(subscription -> syncEverything(userId));
+    }
+    private void syncEverything(String userId) {
+        firestoreHelper.getMeals(userId)
                 .flatMapCompletable(meals -> {
                     for (Meal meal : meals) {
                         meal.setUserId(userId);
-                        if (meal.getType() == null || meal.getType().isEmpty()) {
-                            if (meal.getDayOfWeek() != null && !meal.getDayOfWeek().isEmpty()) {
-                                meal.setType("PLAN");
-                            } else {
-                                meal.setType("FAVORITE");
-                            }
+                        if (meal.getDayOfWeek() != null && !meal.getDayOfWeek().isEmpty()) {
+                            meal.setType("PLAN");
+                        } else {
+                            meal.setType("FAVORITE");
                         }
                     }
-                    return localDataSource.deleteAllFavorites(userId)
+                    return localDataSource.deleteAll(userId)
                             .andThen(localDataSource.insertMeals(meals));
                 })
-                .onErrorComplete();
-
-        return localData.doOnSubscribe(subscription -> {
-            syncFromFirestore
-                    .subscribeOn(io.reactivex.rxjava3.schedulers.Schedulers.io())
-                    .subscribe();
-        });
+                .subscribeOn(Schedulers.io())
+                .onErrorComplete()
+                .subscribe();
     }
+
 
     @Override
     public Completable addToPlan(Meal meal, String dayOfWeek) {
@@ -149,15 +160,7 @@ public class MealsRepositoryImpl implements MealsRepository {
                 .andThen(firestoreHelper.deleteMeal(meal));
     }
 
-    @Override
-    public Flowable<List<Meal>> getPlanByDay(String day) {
-        String userId = getCurrentUserId();
-        if (userId == null) return Flowable.empty();
 
-        return localDataSource.getMealsByDay(day,userId);
-
-
-    }
 
     private String getCurrentUserId() {
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
@@ -176,4 +179,6 @@ public class MealsRepositoryImpl implements MealsRepository {
     public Single<IngredientsResponse> getIngredientsList() {
         return remoteDataSource.getIngredientsList();
     }
+
+
 }
