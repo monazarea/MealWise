@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "109144124141",
+    "project_id": "mealwise-fc267",
+    "storage_bucket": "mealwise-fc267.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109144124141:android:343754c44945d9db397ae4",
+        "android_client_info": {
+          "package_name": "com.example.mealwise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "109144124141-810d4fu170gcnuhob1bpfvgbfktuj9sv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mealwise",
+            "certificate_hash": "14de0dceb14ca5e49e632fcac8244fa2f65493d0"
+          }
+        },
+        {
+          "client_id": "109144124141-7p0qvj8ji15dj199ievtcpmflp2c96t6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyB2f-_Z3qU_7CZGc6bs51249912benC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "109144124141-2itm3eu5qj2meeick3uiv92cur5qnbpf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

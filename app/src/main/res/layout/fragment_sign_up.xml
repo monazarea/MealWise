@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark"
+    android:fillViewport="true"
+    tools:context=".presentation.auth.signUp.view.SignUpFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/cardIcon"-->
+<!--            android:layout_width="64dp"-->
+<!--            android:layout_height="64dp"-->
+<!--            android:layout_marginTop="45dp"-->
+<!--            app:cardBackgroundColor="@color/secondary"-->
+<!--            app:cardCornerRadius="16dp"-->
+<!--            app:cardElevation="0dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:src="@drawable/ic_restaurant"-->
+<!--                app:tint="@color/primary" />-->
+<!--        </androidx.cardview.widget.CardView>-->
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="@string/mealwise"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/plan_cook_and_discover_recipes_offline"
+            android:textColor="@color/gray"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/toggleAuth"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            app:checkedButton="@id/btnToggleLogin1"
+            app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <Button
+                android:id="@+id/btnToggleLogin1"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/light_green"
+                android:text="@string/login"
+                android:textAllCaps="false"
+                android:textColor="@color/gray"
+                app:cornerRadius="12dp" />
+
+            <Button
+                android:id="@+id/btnToggleSignUp1"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/sign_up"
+                android:textAllCaps="false"
+                android:textColor="@color/light_gray"
+                app:backgroundTint="@color/dark_green"
+                app:cornerRadius="12dp"
+                app:strokeColor="@color/more_light_green"
+                app:strokeWidth="1dp" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <TextView
+            android:id="@+id/tvLabelUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:text="@string/username"
+            android:textColor="@color/gray"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toggleAuth" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tlUserName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:boxBackgroundColor="@color/light_green"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusTopStart="16dp"
+
+            app:boxStrokeColor="@color/primary"
+            app:boxStrokeWidth="2dp"
+
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelUserName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/chef_name"
+                android:inputType="textEmailAddress"
+                android:padding="16dp"
+                android:textColor="@color/light_text"
+                android:textColorHint="@color/light_gray" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvLabelEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/email_address"
+            android:textColor="@color/gray"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tlUserName" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tlEmail1"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:boxBackgroundColor="@color/light_green"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusTopStart="16dp"
+
+            app:boxStrokeColor="@color/primary"
+            app:boxStrokeWidth="2dp"
+
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelEmail">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@null"
+
+                android:hint="@string/chef_example_com"
+                android:inputType="textEmailAddress"
+                android:padding="16dp"
+                android:textColor="@color/light_text"
+                android:textColorHint="@color/light_gray" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvLabelPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/password"
+            android:textColor="@color/gray"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tlEmail1" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tlPassword1"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+
+            app:boxBackgroundColor="@color/light_green"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusTopStart="16dp"
+
+            app:boxStrokeColor="@color/primary"
+            app:boxStrokeWidth="2dp"
+
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/more_light_green"
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelPassword">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@null"
+                android:hint="@string/password_hint"
+                android:inputType="textPassword"
+                android:padding="16dp"
+                android:textColor="@color/light_text"
+                android:textColorHint="@color/light_gray" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvLabelConfirmPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/confirm_password"
+            android:textColor="@color/gray"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tlPassword1" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tlConfirmPassword1"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+
+            app:boxBackgroundColor="@color/light_green"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusTopStart="16dp"
+
+            app:boxStrokeColor="@color/primary"
+            app:boxStrokeWidth="2dp"
+
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/more_light_green"
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelConfirmPassword">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etConfiremPassword1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@null"
+                android:hint="@string/password_hint"
+                android:inputType="textPassword"
+                android:padding="16dp"
+                android:textColor="@color/light_text"
+                android:textColorHint="@color/light_gray" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSignUP"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/primary"
+            android:padding="16dp"
+            android:text="@string/sign_up"
+            android:textColor="@color/background_dark"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tlConfirmPassword1" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:elevation="10dp"
+            android:indeterminateTint="@color/white"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/btnSignUP"
+            app:layout_constraintEnd_toEndOf="@id/btnSignUP"
+            app:layout_constraintStart_toStartOf="@id/btnSignUP"
+            app:layout_constraintTop_toTopOf="@id/btnSignUP" />
+
+
+        <LinearLayout
+            android:id="@+id/layoutGoogleSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnSignUP">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="Google Logo"
+                android:src="@drawable/ic_google" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="@string/continue_with_google"
+                android:textColor="@color/light_text"
+                android:textSize="14sp"
+
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvGuest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="30dp"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="@string/continue_as_guest"
+            android:textColor="@color/light_gray"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutGoogleSignIn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

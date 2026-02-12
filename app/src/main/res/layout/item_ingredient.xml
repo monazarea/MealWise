@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="112dp"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginEnd="16dp"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="@color/transparent"
+        app:cardElevation="0dp">
+
+        <ImageView
+            android:id="@+id/ivIngredient"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvIngredientName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="Pasta"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tvIngredientMeasure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="200g"
+        android:textColor="@color/gray"
+        android:textSize="12sp" />
+
+</LinearLayout>
