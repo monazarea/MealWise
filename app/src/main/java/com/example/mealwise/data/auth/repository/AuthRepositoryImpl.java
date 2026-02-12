@@ -1,10 +1,7 @@
 package com.example.mealwise.data.auth.repository;
 
-import android.util.Log;
-
 import com.example.mealwise.data.auth.datasource.AuthLocalDataSource;
 import com.example.mealwise.data.auth.datasource.AuthRemoteDataSource;
-import com.example.mealwise.data.auth.datasource.helpers.FirestoreHelper;
 import com.example.mealwise.data.auth.models.SignInRequest;
 import com.example.mealwise.data.auth.models.SignUpRequest;
 import com.example.mealwise.data.auth.models.User;

@@ -12,9 +12,7 @@ import android.widget.TextView;
 import androidx.navigation.Navigation;
 
 import com.example.mealwise.R;
-import com.example.mealwise.data.auth.datasource.AuthRemoteDataSourceImp;
-import com.example.mealwise.data.auth.datasource.helpers.SharedPrefHelper;
-import com.example.mealwise.data.auth.repository.AuthRepositoryImpl;
+import com.example.mealwise.utils.helpers.SharedPrefHelper;
 import com.example.mealwise.di.Injection;
 import com.example.mealwise.presentation.auth.base.BaseAuthFragment;
 import com.example.mealwise.presentation.auth.signUp.presenter.SignUpPresenter;

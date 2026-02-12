@@ -1,6 +1,5 @@
 package com.example.mealwise.presentation.splash.presenter;
 
-import com.example.mealwise.data.auth.datasource.helpers.SharedPrefHelper;
 import com.example.mealwise.data.auth.repository.AuthRepository;
 import com.example.mealwise.presentation.splash.view.SplashView;
 
