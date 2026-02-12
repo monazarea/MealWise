@@ -24,6 +24,7 @@ import com.example.mealwise.presentation.home.view.MealsAdapter;
 import com.example.mealwise.presentation.mealslist.presenter.MealsListPresenterImpl;
 import com.example.mealwise.utils.AlertUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MealsListFragment extends Fragment implements MealsListView, MealsAdapter.OnMealClickListener {
@@ -62,7 +63,7 @@ public class MealsListFragment extends Fragment implements MealsListView, MealsA
         super.onViewCreated(view, savedInstanceState);
 
         initViews(view);
-
+        setupSearchListener();
         if (name != null && !name.isEmpty()) {
             tvPageTitle.setText(name + " Meals");
         }
@@ -83,7 +84,7 @@ public class MealsListFragment extends Fragment implements MealsListView, MealsA
         tvNoResult = view.findViewById(R.id.tvNoResult);
         etSearch = view.findViewById(R.id.etSearch);
         btnBack = view.findViewById(R.id.btnBack);
-
+        mealsAdapter = new MealsAdapter(requireContext(), new ArrayList<>(), this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
         rvMeals.setLayoutManager(gridLayoutManager);
     }
@@ -105,9 +106,14 @@ public class MealsListFragment extends Fragment implements MealsListView, MealsA
     @Override
     public void showMeals(List<Meal> meals) {
         if (meals != null && !meals.isEmpty()) {
-            mealsAdapter = new MealsAdapter(requireContext(), meals, this);
-            rvMeals.setAdapter(mealsAdapter);
+            rvMeals.setVisibility(View.VISIBLE);
             tvNoResult.setVisibility(View.GONE);
+
+            mealsAdapter.setList(meals);
+
+            rvMeals.setAdapter(mealsAdapter);
+
+
         } else {
             rvMeals.setVisibility(View.GONE);
             tvNoResult.setVisibility(View.VISIBLE);
@@ -135,4 +141,20 @@ public class MealsListFragment extends Fragment implements MealsListView, MealsA
             presenter.onDestroy();
         }
     }
+
+    private void setupSearchListener() {
+        etSearch.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                presenter.filterMeals(s.toString());            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
+    }
+
+
 }
