@@ -2,6 +2,8 @@ package com.example.mealwise.di;
 
 import android.content.Context;
 
+import com.example.mealwise.data.auth.datasource.AuthLocalDataSource;
+import com.example.mealwise.data.auth.datasource.AuthLocalDataSourceImpl;
 import com.example.mealwise.data.auth.datasource.AuthRemoteDataSource;
 import com.example.mealwise.data.auth.datasource.AuthRemoteDataSourceImp;
 import com.example.mealwise.data.auth.datasource.helpers.FirestoreHelper;
@@ -15,10 +17,12 @@ import com.example.mealwise.data.meals.repository.MealsRepositoryImpl;
 
 public class Injection {
 
-    public static AuthRepository provideAuthRepository() {
+    public static AuthRepository provideAuthRepository(Context context) {
         AuthRemoteDataSource remoteDataSource = AuthRemoteDataSourceImp.getInstance();
-        return AuthRepositoryImpl.getInstance(remoteDataSource);
+        AuthLocalDataSource localDataSource = new AuthLocalDataSourceImpl(SharedPrefHelper.getInstance(context));
+        return AuthRepositoryImpl.getInstance(remoteDataSource,localDataSource);
     }
+
 
     public static SharedPrefHelper provideSharedPrefHelper(Context context) {
         return SharedPrefHelper.getInstance(context);

@@ -11,4 +11,5 @@ public interface MealDetailsView {
     void updateFavoriteState(boolean isFavorite);
 
     void showSuccessMessage(String message);
+    public void showGuestAccessDenied();
 }

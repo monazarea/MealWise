@@ -39,8 +39,8 @@ public class SplashFragment extends Fragment implements  SplashView {
 
         presenter = new SplashPresenterImpl(
                 this,
-                Injection.provideSharedPrefHelper(requireContext()),
-                Injection.provideAuthRepository()
+//                Injection.provideSharedPrefHelper(requireContext()),
+                Injection.provideAuthRepository(requireContext())
         );
         presenter.checkNavigationLogic();
     }

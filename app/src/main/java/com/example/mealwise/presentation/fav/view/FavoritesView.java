@@ -9,4 +9,5 @@ public interface FavoritesView {
     void showEmptyState();
     void showError(String errorMsg);
     void showRemoveSuccess(Meal meal);
+    void showGuestWarning();
 }

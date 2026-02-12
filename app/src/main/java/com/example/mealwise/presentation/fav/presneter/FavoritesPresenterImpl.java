@@ -1,5 +1,6 @@
 package com.example.mealwise.presentation.fav.presneter;
 
+import com.example.mealwise.data.auth.repository.AuthRepository;
 import com.example.mealwise.data.meals.models.Meal;
 import com.example.mealwise.data.meals.repository.MealsRepository;
 import com.example.mealwise.presentation.fav.view.FavoritesView;
@@ -12,15 +13,22 @@ public class FavoritesPresenterImpl implements FavoritesPresenter {
 
     private FavoritesView view;
     private MealsRepository repository;
+    private AuthRepository authRepository;
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public FavoritesPresenterImpl(FavoritesView view, MealsRepository repository) {
+    public FavoritesPresenterImpl(FavoritesView view, MealsRepository repository,AuthRepository authRepository) {
         this.view = view;
         this.repository = repository;
+        this.authRepository = authRepository;
     }
 
     @Override
     public void getFavorites() {
+        if (authRepository.isGuestMode()) {
+            view.showEmptyState();
+            view.showGuestWarning();
+            return;
+        }
         disposable.add(
                 repository.getFavoriteMeals()
                         .subscribeOn(Schedulers.io())
@@ -49,6 +57,11 @@ public class FavoritesPresenterImpl implements FavoritesPresenter {
                                 error -> view.showError("Failed to remove: " + error.getMessage())
                         )
         );
+    }
+
+    @Override
+    public Boolean isGuestMode() {
+        return authRepository.isGuestMode();
     }
 
     @Override

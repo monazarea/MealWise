@@ -25,6 +25,7 @@ import com.example.mealwise.data.meals.models.Meal;
 import com.example.mealwise.di.Injection;
 import com.example.mealwise.presentation.details.presenter.MealDetailsPresenterImpl;
 import com.example.mealwise.utils.AlertUtils;
+import com.example.mealwise.utils.AuthDialog;
 import com.example.mealwise.utils.ImageLoader;
 import com.google.android.material.snackbar.Snackbar;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
@@ -57,7 +58,7 @@ public class DetailsFragment extends Fragment implements MealDetailsView {
         super.onViewCreated(view, savedInstanceState);
 
         initViews(view);
-        presenter = new MealDetailsPresenterImpl(this, Injection.provideMealsRepository(requireContext()));
+        presenter = new MealDetailsPresenterImpl(this, Injection.provideMealsRepository(requireContext()),Injection.provideAuthRepository(requireContext()));
 
         if (getArguments() != null) {
             DetailsFragmentArgs args = DetailsFragmentArgs.fromBundle(getArguments());
@@ -253,6 +254,13 @@ public class DetailsFragment extends Fragment implements MealDetailsView {
         return videoId;
     }
 
+    @Override
+    public void showGuestAccessDenied() {
+        AuthDialog.showGuestFavoriteDialog(
+                requireContext(),
+                Navigation.findNavController(requireView())
+        );
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

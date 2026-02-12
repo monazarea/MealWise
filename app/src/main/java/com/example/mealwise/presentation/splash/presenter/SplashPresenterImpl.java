@@ -14,13 +14,13 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class SplashPresenterImpl implements SplashPresenter {
 
     private final SplashView view;
-    private final SharedPrefHelper sharedPrefHelper;
+//    private final SharedPrefHelper sharedPrefHelper;
     private final AuthRepository authRepository;
     private final CompositeDisposable disposables = new CompositeDisposable();
 
-    public SplashPresenterImpl(SplashView view, SharedPrefHelper sharedPrefManager, AuthRepository authRepository) {
+    public SplashPresenterImpl(SplashView view, AuthRepository authRepository) {
         this.view = view;
-        this.sharedPrefHelper = sharedPrefManager;
+//        this.sharedPrefHelper = sharedPrefManager;
         this.authRepository = authRepository;
     }
 
@@ -35,8 +35,8 @@ public class SplashPresenterImpl implements SplashPresenter {
     }
 
     private void decideDestination() {
-        boolean isFirstTime = sharedPrefHelper.isFirstTimeLaunch();
-        boolean isGuest = sharedPrefHelper.isGuestMode();
+        boolean isFirstTime = authRepository.isFirstTimeLaunch();
+        boolean isGuest = authRepository.isGuestMode();
         Object currentUser = authRepository.getCurrentUser();
 
         android.util.Log.d("SplashDebug", "Is First Time: " + isFirstTime);
@@ -45,10 +45,10 @@ public class SplashPresenterImpl implements SplashPresenter {
         if (authRepository.getCurrentUser() != null) {
             view.navigateToHome();
         }
-        else if (sharedPrefHelper.isGuestMode()) {
+        else if (authRepository.isGuestMode()) {
             view.navigateToHome();
         }
-        else if (sharedPrefHelper.isFirstTimeLaunch()) {
+        else if (authRepository.isFirstTimeLaunch()) {
             view.navigateToOnboarding();
         }
         else {
