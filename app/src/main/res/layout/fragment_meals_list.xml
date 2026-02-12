@@ -71,7 +71,7 @@
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:maxLines="1"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textColorHint="@color/gray"
                 android:textSize="14sp" />
         </LinearLayout>
