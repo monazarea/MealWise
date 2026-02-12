@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/splashFragment">
-
+    <action
+        android:id="@+id/action_global_loginFragment"
+        app:destination="@id/loginFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.example.mealwise.presentation.splash.view.SplashFragment"
@@ -108,4 +112,8 @@
             android:id="@+id/action_searchFragment_to_mealsListFragment"
             app:destination="@id/mealsListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="com.example.mealwise.presentation.profile.view.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>

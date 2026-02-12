@@ -2,6 +2,7 @@ package com.example.mealwise.data.auth.repository;
 
 import android.util.Log;
 
+import com.example.mealwise.data.auth.datasource.AuthLocalDataSource;
 import com.example.mealwise.data.auth.datasource.AuthRemoteDataSource;
 import com.example.mealwise.data.auth.datasource.helpers.FirestoreHelper;
 import com.example.mealwise.data.auth.models.SignInRequest;
@@ -12,17 +13,18 @@ import com.google.firebase.auth.FirebaseUser;
 import io.reactivex.rxjava3.core.Completable;
 
 public class AuthRepositoryImpl implements AuthRepository {
-
+    private final AuthLocalDataSource localDataSource;
     private final AuthRemoteDataSource remoteDataSource;
     private static AuthRepositoryImpl instance;
 
-    private AuthRepositoryImpl(AuthRemoteDataSource remoteDataSource) {
+    private AuthRepositoryImpl(AuthRemoteDataSource remoteDataSource,AuthLocalDataSource localDataSource) {
         this.remoteDataSource = remoteDataSource;
+        this.localDataSource =localDataSource;
     }
 
-    public static AuthRepositoryImpl getInstance(AuthRemoteDataSource remoteDataSource) {
+    public static AuthRepositoryImpl getInstance(AuthRemoteDataSource remoteDataSource,AuthLocalDataSource localDataSource) {
         if (instance == null) {
-            instance = new AuthRepositoryImpl(remoteDataSource);
+            instance = new AuthRepositoryImpl(remoteDataSource,localDataSource);
         }
         return instance;
     }
@@ -60,4 +62,31 @@ public class AuthRepositoryImpl implements AuthRepository {
     }
 
 
+
+
+
+    @Override
+    public void setGuestMode(boolean isGuest) {
+        localDataSource.setGuestMode(isGuest);
+    }
+
+    @Override
+    public boolean isGuestMode() {
+        return localDataSource.isGuestMode();
+    }
+
+    @Override
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        localDataSource.setFirstTimeLaunch(isFirstTime);
+    }
+
+    @Override
+    public boolean isFirstTimeLaunch() {
+        return localDataSource.isFirstTimeLaunch();
+    }
+
+    @Override
+    public void clearAuthData() {
+        localDataSource.clearAuthData();
+    }
 }

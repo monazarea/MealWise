@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ import com.example.mealwise.presentation.fav.presneter.FavoritesPresenter;
 import com.example.mealwise.presentation.fav.presneter.FavoritesPresenterImpl;
 import com.example.mealwise.presentation.home.presenter.HomePresenterImpl;
 import com.example.mealwise.presentation.home.view.HomeFragmentDirections;
+import com.example.mealwise.utils.AuthDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +41,7 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
     private FavoritesPresenter presenter;
     private Group emptyStateGroup;
     private ImageView btnBack;
+    private TextView tvEmpty;
 
 
     public FavoritesFragment() {  }
@@ -47,7 +50,7 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        presenter = new FavoritesPresenterImpl(this, Injection.provideMealsRepository(requireContext())) {};
+        presenter = new FavoritesPresenterImpl(this, Injection.provideMealsRepository(requireContext()),Injection.provideAuthRepository(requireContext())) {};
 
     }
 
@@ -59,7 +62,6 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         recyclerView = view.findViewById(R.id.rvFavorites);
         emptyStateGroup = view.findViewById(R.id.groupEmptyState);
 
@@ -67,6 +69,7 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(adapter);
         btnBack = view.findViewById(R.id.btnBack);
+        tvEmpty = view.findViewById(R.id.tvEmpty);
 
         presenter.getFavorites();
         btnBack.setOnClickListener(v -> Navigation.findNavController(v).popBackStack());
@@ -84,6 +87,10 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
     public void showEmptyState() {
         adapter.setList(new ArrayList<>());
         emptyStateGroup.setVisibility(View.VISIBLE);
+
+        if (!presenter.isGuestMode()) {
+            tvEmpty.setText(R.string.no_favorite_meals_yet_ntime_to_explore);
+        }
     }
 
     @Override
@@ -94,6 +101,12 @@ public class FavoritesFragment extends Fragment implements FavoritesView, Favori
     @Override
     public void showRemoveSuccess(Meal meal) {
         Toast.makeText(requireContext(), meal.getName() + " removed", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showGuestWarning() {
+        AuthDialog.showGuestFavoriteDialog(requireContext(), Navigation.findNavController(requireView()));
+        tvEmpty.setText("Sign in to see and save your favorite meals!");
     }
 
 

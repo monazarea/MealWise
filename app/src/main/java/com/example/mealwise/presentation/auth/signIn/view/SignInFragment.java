@@ -40,7 +40,7 @@ public class SignInFragment extends BaseAuthFragment<SignInPresenter> implements
 
     @Override
     protected SignInPresenter createPresenter() {
-        return new SignInPresenterImpl(this, Injection.provideAuthRepository());
+        return new SignInPresenterImpl(this, Injection.provideAuthRepository(requireContext()));
     }
 
     @Override
@@ -75,8 +75,8 @@ public class SignInFragment extends BaseAuthFragment<SignInPresenter> implements
         btnToggleSignUp.setOnClickListener(v -> navigateToSignUp());
 
         tvGuest.setOnClickListener(v -> {
-            SharedPrefHelper.getInstance(requireContext()).setGuestMode(true);
             navigateToHome();
+            SharedPrefHelper.getInstance(requireContext()).setGuestMode(true);
         });
     }
 

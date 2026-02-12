@@ -1,5 +1,8 @@
 package com.example.mealwise.presentation.details.presenter;
 
+import android.util.Log;
+
+import com.example.mealwise.data.auth.repository.AuthRepository;
 import com.example.mealwise.data.meals.models.Meal;
 import com.example.mealwise.data.meals.repository.MealsRepository;
 import com.example.mealwise.presentation.details.view.MealDetailsView;
@@ -12,13 +15,15 @@ public class MealDetailsPresenterImpl implements MealDetailsPresenter{
 
     private MealDetailsView view;
     private MealsRepository repository;
+    private AuthRepository authRepository;
     private CompositeDisposable disposables = new CompositeDisposable();
 
     private boolean isFavorite = false;
 
-    public MealDetailsPresenterImpl(MealDetailsView view, MealsRepository repository) {
+    public MealDetailsPresenterImpl(MealDetailsView view, MealsRepository repository,AuthRepository authRepository) {
         this.view = view;
         this.repository = repository;
+        this.authRepository = authRepository;
     }
 @Override
     public void getMealDetails(String mealId) {
@@ -63,6 +68,11 @@ public class MealDetailsPresenterImpl implements MealDetailsPresenter{
 
     @Override
     public void toggleFavorite(Meal meal) {
+
+        if (authRepository.isGuestMode()) {
+            view.showGuestAccessDenied();
+            return;
+        }
         if (isFavorite) {
             removeFromFavorites(meal);
         } else {
@@ -104,6 +114,10 @@ public class MealDetailsPresenterImpl implements MealDetailsPresenter{
 
     @Override
     public void addToPlan(Meal meal, String dayOfWeek) {
+        if (authRepository.isGuestMode()) {
+            view.showGuestAccessDenied();
+            return;
+        }
         disposables.add(
                 repository.addToPlan(meal, dayOfWeek)
                         .subscribeOn(Schedulers.io())

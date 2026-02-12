@@ -48,4 +48,20 @@
         <item name="android:checkable">true</item>
         <item name="checkedIconVisible">true</item>
         <item name="checkedIconTint">@color/white</item> </style>
+
+    <style name="CustomAlertDialogTheme" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/dialog_rounded_bg</item>
+        <item name="colorSurface">@color/background_dark</item>
+
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/gray</item>
+
+        <item name="colorPrimary">@color/primary</item> <item name="buttonBarPositiveButtonStyle">@style/AlertButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/AlertButtonStyle</item>
+    </style>
+
+    <style name="AlertButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
