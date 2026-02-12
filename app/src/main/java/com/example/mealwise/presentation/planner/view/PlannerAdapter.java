@@ -1,4 +1,4 @@
-package com.example.mealwise.presentation.fav.view;
+package com.example.mealwise.presentation.planner.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,19 +17,17 @@ import com.example.mealwise.utils.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdapter.ViewHolder> {
+public class PlannerAdapter extends RecyclerView.Adapter<PlannerAdapter.ViewHolder> {
 
     private List<Meal> meals = new ArrayList<>();
-    private Context context;
-    private OnFavoriteClickListener listener;
+    private OnPlanClickListener listener;
 
-    public interface OnFavoriteClickListener {
+    public interface OnPlanClickListener {
         void onRemoveClick(Meal meal);
-        void onItemClick(Meal meal);
+        void onMealClick(Meal meal);
     }
 
-    public FavoriteMealsAdapter(Context context, OnFavoriteClickListener listener) {
-        this.context = context;
+    public PlannerAdapter(OnPlanClickListener listener) {
         this.listener = listener;
     }
 
@@ -41,7 +39,7 @@ public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_favorite_meal, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_planner_meal, parent, false);
         return new ViewHolder(view);
     }
 
@@ -50,9 +48,8 @@ public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdap
         Meal meal = meals.get(position);
 
         holder.tvName.setText(meal.getName());
-        holder.tvArea.setText(meal.getArea() + " | " + meal.getCategory());
-        ImageLoader.loadImage(context, meal.getThumbUrl(), holder.imgMeal);
-
+        holder.tvArea.setText(meal.getCategory() + " | " + meal.getArea());
+        ImageLoader.loadImage(holder.itemView.getContext(), meal.getThumbUrl(), holder.imgMeal);
 
         if (meal.getIngredient1() != null && !meal.getIngredient1().isEmpty()) {
             holder.tvIng1.setText(meal.getIngredient1());
@@ -69,7 +66,7 @@ public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdap
         }
 
         holder.btnRemove.setOnClickListener(v -> listener.onRemoveClick(meal));
-        holder.itemView.setOnClickListener(v -> listener.onItemClick(meal));
+        holder.itemView.setOnClickListener(v -> listener.onMealClick(meal));
     }
 
     @Override
@@ -82,14 +79,14 @@ public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdap
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgMeal = itemView.findViewById(R.id.ivFavMealImg);
-            tvName = itemView.findViewById(R.id.tvFavMealName);
-            tvArea = itemView.findViewById(R.id.tvFavMealArea);
-            btnRemove = itemView.findViewById(R.id.btnRemoveFav);
-            cardIng1 = itemView.findViewById(R.id.cardIng1);
-            tvIng1 = itemView.findViewById(R.id.tvIng1);
-            cardIng2 = itemView.findViewById(R.id.cardIng2);
-            tvIng2 = itemView.findViewById(R.id.tvIng2);
+            imgMeal = itemView.findViewById(R.id.ivPlanMealImg);
+            tvName = itemView.findViewById(R.id.tvPlanMealName);
+            tvArea = itemView.findViewById(R.id.tvPlanMealArea);
+            btnRemove = itemView.findViewById(R.id.btnRemovePlan);
+            cardIng1 = itemView.findViewById(R.id.cardPlanIng1);
+            tvIng1 = itemView.findViewById(R.id.tvPlanIng1);
+            cardIng2 = itemView.findViewById(R.id.cardPlanIng2);
+            tvIng2 = itemView.findViewById(R.id.tvPlanIng2);
         }
     }
 }

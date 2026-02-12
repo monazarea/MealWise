@@ -12,4 +12,9 @@ public interface AuthRepository {
     Completable signIn(SignInRequest signInRequest);
     User getCurrentUser();
     Completable signOut();
+    void setGuestMode(boolean isGuest);
+    boolean isGuestMode();
+    void setFirstTimeLaunch(boolean isFirstTime);
+    boolean isFirstTimeLaunch();
+    void clearAuthData();
 }

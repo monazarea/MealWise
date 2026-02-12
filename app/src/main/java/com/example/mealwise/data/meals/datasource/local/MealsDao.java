@@ -24,8 +24,8 @@ public interface MealsDao {
     @Query("SELECT * FROM meals_table WHERE type = 'FAVORITE' AND userId = :userId")
     Flowable<List<Meal>> getFavoriteMeals(String userId);
 
-    @Query("SELECT * FROM meals_table WHERE type = 'PLAN' AND dayOfWeek = :day AND userId = :userId")
-    Flowable<List<Meal>> getMealsByDay(String day, String userId);
+    @Query("SELECT * FROM meals_table WHERE type = 'PLAN' AND dayOfWeek = :date AND userId = :userId")
+    Flowable<List<Meal>> getMealsByDate(String date, String userId);
 
     @Query("SELECT COUNT(*) FROM meals_table WHERE id = :apiId AND type = 'FAVORITE' AND userId = :userId")
     Single<Integer> isMealFavorite(String apiId, String userId);
@@ -36,7 +36,7 @@ public interface MealsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Completable insertAllMeals(List<Meal> meals);
 
-    @Query("DELETE FROM meals_table WHERE type = 'FAVORITE' AND userId = :userId")
-    Completable deleteAllFavorites(String userId);
+    @Query("DELETE FROM meals_table WHERE userId = :userId")
+    Completable deleteAll(String userId);
 
 }

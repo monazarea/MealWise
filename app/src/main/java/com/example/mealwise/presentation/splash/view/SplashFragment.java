@@ -14,9 +14,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.example.mealwise.R;
-import com.example.mealwise.data.auth.datasource.AuthRemoteDataSourceImp;
-import com.example.mealwise.data.auth.datasource.helpers.SharedPrefHelper;
-import com.example.mealwise.data.auth.repository.AuthRepositoryImpl;
 import com.example.mealwise.di.Injection;
 import com.example.mealwise.presentation.splash.presenter.SplashPresenter;
 import com.example.mealwise.presentation.splash.presenter.SplashPresenterImpl;
@@ -39,8 +36,8 @@ public class SplashFragment extends Fragment implements  SplashView {
 
         presenter = new SplashPresenterImpl(
                 this,
-                Injection.provideSharedPrefHelper(requireContext()),
-                Injection.provideAuthRepository()
+//                Injection.provideSharedPrefHelper(requireContext()),
+                Injection.provideAuthRepository(requireContext())
         );
         presenter.checkNavigationLogic();
     }
