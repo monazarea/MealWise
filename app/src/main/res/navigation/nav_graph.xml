@@ -116,4 +116,12 @@
         android:id="@+id/profileFragment2"
         android:name="com.example.mealwise.presentation.profile.view.ProfileFragment"
         android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/plannerFragment2"
+        android:name="com.example.mealwise.presentation.planner.view.PlannerFragment"
+        android:label="PlannerFragment" >
+        <action
+            android:id="@+id/action_plannerFragment2_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
 </navigation>

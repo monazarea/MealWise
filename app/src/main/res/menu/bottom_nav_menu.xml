@@ -6,7 +6,7 @@
         android:title="@string/home" />
 
     <item
-        android:id="@+id/plannerFragment"
+        android:id="@+id/plannerFragment2"
         android:icon="@drawable/ic_calendar"
         android:title="@string/planner" />
 

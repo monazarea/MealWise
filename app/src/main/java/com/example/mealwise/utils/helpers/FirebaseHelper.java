@@ -1,4 +1,4 @@
-package com.example.mealwise.data.auth.datasource.helpers;
+package com.example.mealwise.utils.helpers;
 
 import com.example.mealwise.data.auth.models.SignInRequest;
 import com.example.mealwise.data.auth.models.SignUpRequest;

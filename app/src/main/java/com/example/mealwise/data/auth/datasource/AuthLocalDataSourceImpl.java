@@ -1,6 +1,6 @@
 package com.example.mealwise.data.auth.datasource;
 
-import com.example.mealwise.data.auth.datasource.helpers.SharedPrefHelper;
+import com.example.mealwise.utils.helpers.SharedPrefHelper;
 
 public class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 

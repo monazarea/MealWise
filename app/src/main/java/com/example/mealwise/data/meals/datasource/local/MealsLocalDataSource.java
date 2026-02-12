@@ -43,8 +43,8 @@ public class MealsLocalDataSource {
     public Completable deleteFavoriteById(String id, String userId) {
         return dao.deleteFavoriteById(id, userId);
     }
-    public Completable deleteAllFavorites(String userId){
-        return  dao.deleteAllFavorites(userId);
+    public Completable deleteAll(String userId){
+        return  dao.deleteAll(userId);
     }
 
 
@@ -53,7 +53,8 @@ public class MealsLocalDataSource {
     }
 
     public Flowable<List<Meal>> getMealsByDay(String day, String userId) {
-        return dao.getMealsByDay(day, userId);
+        android.util.Log.d("PlannerLog", "LocalDataSource: Fetching from DB for day: [" + day + "] and userId: [" + userId + "]");
+        return dao.getMealsByDate(day, userId);
     }
 
     public Single<Boolean> isMealFavorite(String apiId, String userId) {
